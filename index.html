@@ -1,3 +1,58 @@
-Test Push
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Project 2</title>
+    <link rel="stylesheet" href="project2.css">
+</head>
+<body>
+    <div class="topnav">
+        <a href="../Documentation.html">Documentation</a>
+        <a href="../index.html">Graphs</a>
+    </div>
 
-Hello World
+    <div class="map-target"></div>
+</body>
+</html>
+
+<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="https://d3js.org/d3-queue.v1.min.js"></script>
+<script type="text/javascript">
+    var width = 720,
+        height = 500;
+
+    var projection = d3.geoAlbers()
+        .scale(1000)
+        .translate([width / 2, height / 2]);
+
+    var path = d3.geoPath()
+        .projection(projection);
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    // Queue up datasets using d3 Queue
+    queue()
+        .defer(d3.json, "us2018.topo.json") // Load US Counties
+        .await(ready);
+    // Ready Function, runs when data is loaded
+    function ready(error, us) {
+        if (error) throw error;
+
+        var color = d3.scaleThreshold()
+            .domain([1,2])
+            .range(["#f2f0f7", "#54278f"]);
+        svg.append("g")
+            .attr("class", "counties")
+            .selectAll("path")
+            .data( us.features) // Bind TopoJSON data elements
+            .enter().append("path")
+            .attr("d", path)
+            .style("fill", "white")
+            .style("stroke", "black").style("fill", function (d) {
+                return color(d.properties.STATE % 2); // get rate value for property matching data ID
+                // pass rate value to color function, return color based on domain and range
+            });
+    }
+</script>
