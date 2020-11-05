@@ -75,6 +75,10 @@
 					let costRank = data[counter].costRank;
 					let costIndexPercentile = data[counter].costIndexPercentile;
 					let laborForceSept19 = data[counter].LaborForceSept2019;
+					let ueSept2019 = data[counter].UESept2019;
+					let ueJuly2020 = data[counter].UEJuly2020;
+					
+					
 					console.log(data[counter].LaborForceSept2019);
 					
 					emp_data.push ({
@@ -82,7 +86,9 @@
 						costIndex: costIndex,
 						costRank: costRank,
 						costIndexPercentile: costIndexPercentile,
-						laborForceSept19: laborForceSept19
+						laborForceSept19: laborForceSept19,
+						ueSept2019: ueSept2019,
+						ueJuly2020: ueJuly2020
 					});
 				};
 			console.log(emp_data.laborForceSept19);
