@@ -91,6 +91,10 @@
 					let uePercAug2020Percentile = data[counter].UEPercAug2020Percentile;
 					let uePercSept2020Percentile = data[counter].UEPercSept2020Percentile;
 					let topEmployer = data[counter].TopEmployer;
+					let topEmployerJobs = data[counter].TopEmployerJobs;
+					let totalJobCount = data[counter].TotalJobCount;
+					let topEmployerJobsPercentile = data[counter].TopEmployerJobsPercentile;
+					let totalJobCountPercentile = data[counter].TotalJobCountPercentile;
 					
 					
 					
@@ -115,7 +119,11 @@
 						uePercJuly2020Percentile: uePercJuly2020Percentile,
 						uePercAug2020Percentile: uePercAug2020Percentile,
 						uePercSept2020Percentile: uePercSept2020Percentile,
-						topEmployer:topEmployer
+						topEmployer:topEmployer,
+						topEmployerJobs:topEmployerJobs,
+						totalJobCount:totalJobCount,
+						topEmployerJobsPercentile:topEmployerJobsPercentile,
+						totalJobCountPercentile:totalJobCountPercentile
 					});
 				};
 			console.log(emp_data);
