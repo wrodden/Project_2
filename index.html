@@ -66,4 +66,25 @@
         });
     }
     drawFirstMap();
+	let emp_data = [];
+	d3.csv("Project 2 Employment Data.csv", function(data) {
+				let deathId = 0;
+				let cumulative_total=0;
+				for (let counter = 0; counter < data.length; counter++) {
+				
+					let state = data[counter].State;
+					let costIndex = data[counter].costIndex;
+					let costRank = data[counter].costRank;
+					let costIndexPercentile = data[counter].costIndexPercentile;
+					let laborForceSept19 = data[counter].Labor_Force_Sept_2019;
+					
+					
+					emp_data.push ({
+						state: state,
+						costIndex: costIndex,
+						costRank: costRank,
+						costIndexPercentile: costIndexPercentile,
+						laborForceSept19: laborForceSept19
+					});
+				console.log(death_days)
 </script>
