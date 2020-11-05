@@ -95,6 +95,7 @@
 					let totalJobCount = data[counter].TotalJobCount;
 					let topEmployerJobsPercentile = data[counter].TopEmployerJobsPercentile;
 					let totalJobCountPercentile = data[counter].TotalJobCountPercentile;
+					let id = data[counter].id;
 					
 					
 					
@@ -123,7 +124,8 @@
 						topEmployerJobs:topEmployerJobs,
 						totalJobCount:totalJobCount,
 						topEmployerJobsPercentile:topEmployerJobsPercentile,
-						totalJobCountPercentile:totalJobCountPercentile
+						totalJobCountPercentile:totalJobCountPercentile,
+						id:id
 					});
 				};
 			console.log(emp_data);
