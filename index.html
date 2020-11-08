@@ -11,6 +11,13 @@
         <a href="../index.html">Graphs</a>
     </div>
 
+    <input type="radio" name="costType" id="costIndex" checked="checked" value="costIndex">Overall Cost
+    <input type="radio" name="costType" id="totalJobCount" value="totalJobCount">Total Job Count
+    <input type="radio" name="costType" id="uePercSept2020Percentile" value="uePercSept2020Percentile">Unemployment 
+    <input type="radio" name="costType" id="laborForceSept2020" value="laborForceSept2020">Labor Force
+    <input type="radio" name="costType" id="topEmployerJobs" value="topEmployerJobs">Top Employer Jobs
+    <div id="legend1" style="height:100px"></div>
+
     <svg id="map-target"></svg>
 </body>
 </html>
@@ -18,116 +25,5 @@
 <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
 <script src="https://d3js.org/d3-queue.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
-<script type="text/javascript">
-
-    function drawFirstMap() {
-        var width = 720,
-            height = 500;
-
-        var projection = d3.geoAlbers()
-            .scale(1000)
-            .translate([width / 2, height / 2]);
-
-        var path = d3.geoPath()
-            .projection(projection);
-
-        var svg = d3.select("#map-target")
-            .attr("width", width)
-            .attr("height", height);
-
-        var path = d3.geoPath();
-        d3.json("https://d3js.org/us-10m.v1.json", function (error, us) {
-            if (error) throw error;
-
-
-            var color = d3.scaleThreshold()
-                .domain([true, false])
-                .range(["#f2f0f7", "#54278f"]);
-            d3.tsv("us-state-names.tsv", function (tsv) {
-                // extract just the names and Ids
-                var names = {};
-                tsv.forEach(function (d, i) {
-                    names[d.id] = d.name;
-                });
-
-                svg.append("g")
-                    .attr("class", "states")
-                    .selectAll("path")
-                    .data(topojson.feature(us, us.objects.states).features)
-                    .enter().append("path")
-                    .attr("d", path)
-                    .style("fill", function (d) {
-                        var x = color(names[parseInt(d.id)] === "Alaska");
-                        return x;
-                    });
-
-            });
-
-        });
-    }
-    drawFirstMap();
-	let emp_data = [];
-	d3.csv("Project 2 Employment Data.csv", function(data) {
-				for (let counter = 0; counter < data.length; counter++) {
-				
-					let state = data[counter].State;
-					let costIndex = data[counter].costIndex;
-					let costRank = data[counter].costRank;
-					let costIndexPercentile = data[counter].costIndexPercentile;
-					let laborForceSept19 = data[counter].LaborForceSept2019;
-					let laborForceJuly2020 = data[counter].LaborForceJuly2020;
-					let laborForceAug2020 = data[counter].LaborForceAug2020;
-					let laborForceSept2020 = data[counter].LaborForceSept2020;
-					let ueSept2019 = data[counter].UESept2019;
-					let ueJuly2020 = data[counter].UEJuly2020;
-					let ueAug2020 = data[counter].UEAug2020;
-					let ueSept2020 = data[counter].UESept2020;
-					let uePercSept2019 = data[counter].UEPercSept2019;
-					let uePercJuly2020 = data[counter].UEPercJuly2020;
-					let uePercAug2020 = data[counter].UEPercAug2020;
-					let uePercSept2020 = data[counter].UEPercSept2020;
-					let uePercSept2019Percentile = data[counter].UEPercSept2019Percentile;
-					let uePercJuly2020Percentile = data[counter].UEPercJuly2020Percentile;
-					let uePercAug2020Percentile = data[counter].UEPercAug2020Percentile;
-					let uePercSept2020Percentile = data[counter].UEPercSept2020Percentile;
-					let topEmployer = data[counter].TopEmployer;
-					let topEmployerJobs = data[counter].TopEmployerJobs;
-					let totalJobCount = data[counter].TotalJobCount;
-					let topEmployerJobsPercentile = data[counter].TopEmployerJobsPercentile;
-					let totalJobCountPercentile = data[counter].TotalJobCountPercentile;
-					let id = data[counter].id;
-					
-					
-					
-					emp_data.push ({
-						state: state,
-						costIndex: costIndex,
-						costRank: costRank,
-						costIndexPercentile: costIndexPercentile,
-						laborForceSept19: laborForceSept19,
-						laborForceJuly2020: laborForceJuly2020,
-						laborForceAug2020: laborForceAug2020,
-						laborForceSept2020: laborForceSept2020,
-						ueSept2019: ueSept2019,
-						ueJuly2020: ueJuly2020,
-						ueAug2020: ueAug2020,
-						ueSept2020: ueSept2020,
-						uePercSept2019: uePercSept2019,
-						uePercJuly2020: uePercJuly2020,
-						uePercAug2020: uePercAug2020,
-						uePercSept2020: uePercSept2020,
-						uePercSept2019Percentile: uePercSept2019Percentile,
-						uePercJuly2020Percentile: uePercJuly2020Percentile,
-						uePercAug2020Percentile: uePercAug2020Percentile,
-						uePercSept2020Percentile: uePercSept2020Percentile,
-						topEmployer:topEmployer,
-						topEmployerJobs:topEmployerJobs,
-						totalJobCount:totalJobCount,
-						topEmployerJobsPercentile:topEmployerJobsPercentile,
-						totalJobCountPercentile:totalJobCountPercentile,
-						id:id
-					});
-				};
-			console.log(emp_data);
-	});
-</script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="index.js"></script>
