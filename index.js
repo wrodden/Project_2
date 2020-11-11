@@ -274,7 +274,6 @@
 				
 				});
 
-        };
     };
     d3.csv("Project 2 Employment Data.csv", function (data) {
         for (let counter = 0; counter < data.length;counter++) {
