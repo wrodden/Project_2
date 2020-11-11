@@ -271,7 +271,8 @@
                         }
                         return x;
                     });
-				svg.append("title")
+				svg.selectAll("g")
+					.append("title")
 					.text(function(d) {
 					return value;
 					};
