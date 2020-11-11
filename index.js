@@ -273,8 +273,7 @@
                     });
 				svg.append("title")
 					.text(function(d) {
-					return value 
-						(value==1 ? " Rank" );
+					return value;
 					};
 				});
 
