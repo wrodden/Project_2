@@ -140,37 +140,37 @@
 					.style("fill", function (d) {
                         var value = 0;
                         let max = 0;
-                        let min = 9999;
+                        let min = 9999999999;
                         let flip = false;
                         for (var i in emp_data) {
-                            if (type == 'costIndex' && emp_data[i].id == d.id)
+                            if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id))
 							{
-                                value = emp_data[i].costRank;
+                                value = parseInt(emp_data[i].costRank);
                                 flip = false;
                             }
-                            else if (type == 'totalJobCount' && emp_data[i].id == d.id) {
-                                value = emp_data[i].totalJobCount;
+                            else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                                value = parseFloat(emp_data[i].totalJobCount);
                                 flip = true;
                             }
-                            else if (type == 'uePercSept2020Percentile' && emp_data[i].id == d.id) {
-                                value = emp_data[i].uePercSept2020Percentile;
+                            else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                                value = parseFloat(emp_data[i].uePercSept2020Percentile);
                                 flip = false;
                             }
-                            else if (type == 'laborForceSept2020' && emp_data[i].id == d.id) {
-                                value = emp_data[i].laborForceSept2020.replace(',', '');
+                            else if (type == 'laborForceSept2020' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                                value = parseInt(emp_data[i].laborForceSept2020.replace(',', ''));
                                 flip = false;
                             }
-                            else if (type == 'topEmployerJobs' && emp_data[i].id == d.id) {
-                                value = emp_data[i].topEmployerJobs;
+                            else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                                value = parseInt(emp_data[i].topEmployerJobs);
                                 flip = true;
                             }
 
                             if (type == 'costIndex') {
-                                if (parseFloat(emp_data[i].costRank) > max) {
-                                    max = parseFloat(emp_data[i].costRank)
+                                if (parseInt(emp_data[i].costRank) > max) {
+                                    max = parseInt(emp_data[i].costRank)
                                 }
-                                if (parseFloat(emp_data[i].costRank) < min) {
-                                    min = parseFloat(emp_data[i].costRank);
+                                if (parseInt(emp_data[i].costRank) < min) {
+                                    min = parseInt(emp_data[i].costRank);
                                 }
                             }
                             else if (type == 'totalJobCount') {
@@ -198,78 +198,78 @@
                                 }
                             }
                             else if (type == 'topEmployerJobs' ) {
-                                if (parseFloat(emp_data[i].topEmployerJobs) > max) {
-                                    max = parseFloat(emp_data[i].topEmployerJobs)
+                                if (parseInt(emp_data[i].topEmployerJobs) > max) {
+                                    max = parseInt(emp_data[i].topEmployerJobs)
                                 }
-                                if (parseFloat(emp_data[i].topEmployerJobs) < min) {
-                                    min = parseFloat(emp_data[i].topEmployerJobs);
+                                if (parseInt(emp_data[i].topEmployerJobs) < min) {
+                                    min = parseInt(emp_data[i].topEmployerJobs);
                                 }
                             }
                         }
                         let dif = max - min;
                         dif = dif / 10;
-                        
-                        if (value < max - dif * 10) {
-                            var x = color(1);
+
+                        if (value < max - (dif * 9)) {
                             if (flip) {
-                                color(10)
+                                return color(9)
                             }
+                            return color(0);
                         }
-                        else if (value < max - dif * 9) {
-                            var x = color(2);
+                        else if (value < max - (dif * 8)) { 
                             if (flip) {
-                                color(9)
+                                return color(8)
                             }
+                            return color(1);
                         }
-                        else if (value < max - dif * 8) {
-                            var x = color(3);
+                        else if (value < max - (dif * 7)) { 
                             if (flip) {
-                                color(8)
+                                return color(7)
                             }
+                            return color(2);
                         }
-                        else if (value < max - dif * 7) {
-                            var x = color(4);
+                        else if (value < max - (dif * 6)) { 
                             if (flip) {
-                                color(7)
+                                return color(6)
                             }
+                            return color(3);
                         }
-                        else if (value < max - dif * 6) {
-                            var x = color(5);
+                        else if (value < max - (dif * 5)) { 
                             if (flip) {
-                                color(6)
+                                return color(5)
                             }
+                            return color(4);
                         }
-                        else if (value < max - dif * 5) {
-                            var x = color(6);
+                        else if (value < max - (dif * 4)) { 
                             if (flip) {
-                                color(5)
+                                return color(4)
                             }
+                            return color(5);
                         }
-                        else if (value < max - dif * 4) {
-                            var x = color(7);
+                        else if (value < max - (dif * 3)) { 
                             if (flip) {
-                                color(4)
+                                return color(3)
                             }
+                            return color(6);
                         }
-                        else if (value < max - dif * 3) {
-                            var x = color(8);
+                        else if (value < max - (dif * 2)) { 
                             if (flip) {
-                                color(3)
+                                return color(2)
                             }
+                            return color(7);
                         }
-                        else if (value < max - dif * 2) {
-                            var x = color(9);
+                        else if (value < max - (dif * 1)) { 
                             if (flip) {
-                                color(2)
+                                return color(1)
                             }
+                            return color(8);
                         }
-                        else {
-                            var x = color(10);
+                        else if (value <= max) { 
                             if (flip) {
-                                color(1)
+                                return color(0)
                             }
+                            return color(9);
                         }
-                        return x;
+                        return "";
                     });
 		});
     };
