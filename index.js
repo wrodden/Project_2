@@ -1,7 +1,8 @@
 
     let emp_data = [];
 
-    function drawFirstMap(type) {
+function drawFirstMap(type) {
+    $("#map-target").empty();
         var width = 720,
             height = 500;
 
@@ -35,47 +36,47 @@
             .attr("spreadMethod", "pad");
         legend.append("stop")
             .attr("offset", "0%")
-            .attr("stop-color", "#5b3ec9")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", 0);
 
         legend.append("stop")
             .attr("offset", "10%")
-            .attr("stop-color", "#6e55cf")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .10);
 
         legend.append("stop")
             .attr("offset", "20%")
-            .attr("stop-color", "#806bcf")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .2);
 
         legend.append("stop")
             .attr("offset", "40%")
-            .attr("stop-color", "#9081c9")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .3);
         legend.append("stop")
             .attr("offset", "50%")
-            .attr("stop-color", "#9c8fcc")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .4);
         legend.append("stop")
             .attr("offset", "60%")
-            .attr("stop-color", "#cf6969")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .5);
         legend.append("stop")
             .attr("offset", "70%")
-            .attr("stop-color", "#d45353")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .6);
         legend.append("stop")
             .attr("offset", "80%")
-            .attr("stop-color", "#d94343")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .7);
         legend.append("stop")
             .attr("offset", "90%")
-            .attr("stop-color", "#d92727")
-            .attr("stop-opacity", 1);
+            .attr("stop-color", "#de0404")
+            .attr("stop-opacity", .8);
         legend.append("stop")
             .attr("offset", "100%")
             .attr("stop-color", "#de0404")
-            .attr("stop-opacity", 1);
+            .attr("stop-opacity", .9);
 
 
         key.append("rect")
@@ -131,146 +132,33 @@
             if (error) throw error;
 
 
-                svg.append("g")
-                    .attr("class", "states")
-                    .selectAll("path")
-                    .data(topojson.feature(us, us.objects.states).features)
-                    .enter().append("path")
-                    .attr("d", path)
-					.style("fill", function (d) {
-                        var value = 0;
-                        let max = 0;
-                        let min = 9999999999;
-                        let flip = false;
-                        for (var i in emp_data) {
-                            if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id))
-							{
-                                value = parseInt(emp_data[i].costRank);
-                                flip = false;
-                            }
-                            else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                                value = parseFloat(emp_data[i].totalJobCount);
-                                flip = true;
-                            }
-                            else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                                value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                                flip = false;
-                            }
-                            else if (type == 'laborForceSept2020' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                                value = parseInt(emp_data[i].laborForceSept2020.replace(',', ''));
-                                flip = false;
-                            }
-                            else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                                value = parseInt(emp_data[i].topEmployerJobs);
-                                flip = true;
-                            }
 
-                            if (type == 'costIndex') {
-                                if (parseInt(emp_data[i].costRank) > max) {
-                                    max = parseInt(emp_data[i].costRank)
-                                }
-                                if (parseInt(emp_data[i].costRank) < min) {
-                                    min = parseInt(emp_data[i].costRank);
-                                }
-                            }
-                            else if (type == 'totalJobCount') {
-                                if (parseFloat(emp_data[i].totalJobCount) > max) {
-                                    max = parseFloat(emp_data[i].totalJobCount)
-                                }
-                                if (parseFloat(emp_data[i].totalJobCount) < min) {
-                                    min = parseFloat(emp_data[i].totalJobCount);
-                                }
-                            }
-                            else if (type == 'uePercSept2020Percentile') {
-                                if (parseFloat(emp_data[i].uePercSept2020Percentile) > max) {
-                                    max = parseFloat(emp_data[i].uePercSept2020Percentile)
-                                }
-                                if (parseFloat(emp_data[i].uePercSept2020Percentile) < min) {
-                                    min = parseFloat(emp_data[i].uePercSept2020Percentile);
-                                }
-                            }
-                            else if (type == 'laborForceSept2020') {
-                                if (parseInt(emp_data[i].laborForceSept2020.replace(',','')) > max) {
-                                    max = parseInt(emp_data[i].laborForceSept2020.replace(',', ''))
-                                }
-                                if (parseInt(emp_data[i].laborForceSept2020.replace(',', '')) < min) {
-                                    min = parseInt(emp_data[i].laborForceSept2020.replace(',', ''));
-                                }
-                            }
-                            else if (type == 'topEmployerJobs' ) {
-                                if (parseInt(emp_data[i].topEmployerJobs) > max) {
-                                    max = parseInt(emp_data[i].topEmployerJobs)
-                                }
-                                if (parseInt(emp_data[i].topEmployerJobs) < min) {
-                                    min = parseInt(emp_data[i].topEmployerJobs);
-                                }
-                            }
+            svg.append("g")
+                .attr("class", "states")
+                .selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                .enter().append("path")
+                .attr("d", path)
+                .style("fill", "#de0404")
+                .style("opacity", function (d) {
+                    for (var i in emp_data) {
+                        if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].costIndexPercentile);
                         }
-                        let dif = max - min;
-                        dif = dif / 10;
-
-                        if (value < max - (dif * 9)) {
-                            if (flip) {
-                                return color(9)
-                            }
-                            return color(0);
+                        else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].totalJobCountPercentile);
                         }
-                        else if (value < max - (dif * 8)) { 
-                            if (flip) {
-                                return color(8)
-                            }
-                            return color(1);
+                        else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].uePercSept2020Percentile);
                         }
-                        else if (value < max - (dif * 7)) { 
-                            if (flip) {
-                                return color(7)
-                            }
-                            return color(2);
+                        else if (type == 'laborForceSept2020' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].laborForceSept2020);
                         }
-                        else if (value < max - (dif * 6)) { 
-                            if (flip) {
-                                return color(6)
-                            }
-                            return color(3);
+                        else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].topEmployerJobsPercentile);
                         }
-                        else if (value < max - (dif * 5)) { 
-                            if (flip) {
-                                return color(5)
-                            }
-                            return color(4);
-                        }
-                        else if (value < max - (dif * 4)) { 
-                            if (flip) {
-                                return color(4)
-                            }
-                            return color(5);
-                        }
-                        else if (value < max - (dif * 3)) { 
-                            if (flip) {
-                                return color(3)
-                            }
-                            return color(6);
-                        }
-                        else if (value < max - (dif * 2)) { 
-                            if (flip) {
-                                return color(2)
-                            }
-                            return color(7);
-                        }
-                        else if (value < max - (dif * 1)) { 
-                            if (flip) {
-                                return color(1)
-                            }
-                            return color(8);
-                        }
-                        else if (value <= max) { 
-                            if (flip) {
-                                return color(0)
-                            }
-                            return color(9);
-                        }
-                        return "";
-                    });
+                    }
+                });
 		});
     };
     d3.csv("Project 2 Employment Data.csv", function (data) {
