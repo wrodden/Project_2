@@ -11,6 +11,7 @@
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
+        font-size:1.75em;
     }
 
         .topnav a:hover {
@@ -28,12 +29,16 @@ div.tooltip-donut {
     border-radius: 8px;
     pointer-events: none;
     font-size: 1.3rem;
+    z-index: 9;
 }
 body {
     margin: 0;
+    height:100%;
     overflow: hidden;
 }
-
+html{
+    height:100%;
+}
 svg {
     width: 100vw;
     height: 100vh;
@@ -62,5 +67,43 @@ path {
 
 svg {
     padding-left: 50px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    height: 100%; /* Should be removed. Only for demonstration */
+}
+
+ .right {
+    width: 25%;
+}
+.left {
+    width: 25%;
+    height: 100%; /* 100% Full-height */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.middle {
+    width: 50%;
+}
+.row{
+    height:100%;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 

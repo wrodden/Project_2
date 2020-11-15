@@ -10,15 +10,20 @@
         <a href="../Documentation.html">Documentation</a>
         <a href="../index.html">Graphs</a>
     </div>
+    <div class="row">
+        <div class="column left" style="background-color:aqua"></div>
+        <div class="column middle">
+            <input type="radio" name="costType" id="costIndex" checked="checked" value="costIndex">Overall Cost
+            <input type="radio" name="costType" id="totalJobCount" value="totalJobCount">Total Job Count
+            <input type="radio" name="costType" id="uePercSept2020Percentile" value="uePercSept2020Percentile">Unemployment
+            <input type="radio" name="costType" id="laborForceSept2020" value="laborForceSept2020">Labor Force
+            <input type="radio" name="costType" id="topEmployerJobs" value="topEmployerJobs">Top Employer Jobs
+            <div id="legend1" style="height:100px"></div>
+            <svg id="map-target"></svg>
+        </div>
+        <div class="column right"></div>
+    </div>
 
-    <input type="radio" name="costType" id="costIndex" checked="checked" value="costIndex">Overall Cost
-    <input type="radio" name="costType" id="totalJobCount" value="totalJobCount">Total Job Count
-    <input type="radio" name="costType" id="uePercSept2020Percentile" value="uePercSept2020Percentile">Unemployment 
-    <input type="radio" name="costType" id="laborForceSept2020" value="laborForceSept2020">Labor Force
-    <input type="radio" name="costType" id="topEmployerJobs" value="topEmployerJobs">Top Employer Jobs
-    <div id="legend1" style="height:100px"></div>
-
-    <svg id="map-target"></svg>
 </body>
 </html>
 

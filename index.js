@@ -17,9 +17,7 @@ function drawFirstMap(type) {
             .attr("width", width)
             .attr("height", height);
 
-        var color = d3.scaleThreshold()
-            .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-            .range(["#5b3ec9", "#6e55cf", "#806bcf", "#9081c9", "#9c8fcc", "#cf6969", "#d45353", "#d94343", "#d92727", "#de0404"]);
+
         var key = d3.select("#legend1")
             .append("svg")
             .attr("width", 300)
@@ -108,7 +106,7 @@ function drawFirstMap(type) {
             l = 'Cost Index Cheapest to most Expensive';
         }
         else if (type == 'totalJobCount') {
-            l = 'Total Jobs Available Highest to Lowest';
+            l = 'Total Jobs Available Lowest to Highest';
         }
         else if (type == 'uePercSept2020Percentile') {
             l = 'Unemployment Lowest to Highest';
@@ -117,17 +115,21 @@ function drawFirstMap(type) {
             l = 'Total labor force Lowest to Highest';
         }
         else if (type == 'topEmployerJobs') {
-            l = 'Top Employer available jobs Highest to Lowest';
+            l = 'Top Employer available jobs Lowest to Highest';
         }
         key.append("text")
             .attr("transform",
                 "translate(150 ,75)")
             .style("text-anchor", "middle")
             .style("font-size", 12)
-            .attr("id", "label2")
+            .attr("id", "label2");
         document.getElementById('label2').innerHTML = l;
 
         var path = d3.geoPath();
+        var toolTip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip-donut")
+            .style("opacity", 0);
         d3.json("https://d3js.org/us-10m.v1.json", function (error, us) {
             if (error) throw error;
 
@@ -158,7 +160,61 @@ function drawFirstMap(type) {
                             return parseFloat(emp_data[i].topEmployerJobsPercentile);
                         }
                     }
-                });
+                }).on('mouseover', function (d, i) {
+
+                    var currentState = this;
+                    d3.select(this).style('fill', '#000000');
+                    let value = ""
+                    for (var i in emp_data) {
+                        if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            value = parseFloat(emp_data[i].costIndexPercentile);
+                            toolTip.html(' Cost rank: ' + emp_data[i].costRank +
+                                '</br>Cost index percentile: ' + parseFloat(emp_data[i].costIndexPercentile * 100).toFixed(2) )
+                                .style("left", (d3.event.pageX + 20) + "px")
+                                .style("top", (d3.event.pageY - 30) + "px");
+                        }
+                        else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            value = parseFloat(emp_data[i].totalJobCountPercentile);
+                            toolTip.html('Total job count: ' + emp_data[i].totalJobCount +
+                                '</br>Cost index percentile: ' + parseFloat(emp_data[i].totalJobCountPercentile * 100).toFixed(2))
+                                .style("left", (d3.event.pageX + 20) + "px")
+                                .style("top", (d3.event.pageY - 30) + "px");
+                        }
+                        else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            value = parseFloat(emp_data[i].uePercSept2020Percentile);
+                            toolTip.html('Unemployment: ' + emp_data[i].ueSept2020 +
+                                '</br>Unemployment percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
+                                .style("left", (d3.event.pageX + 20) + "px")
+                                .style("top", (d3.event.pageY - 30) + "px");
+                        }
+                        else if (type == 'laborForceSept2020' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            value = parseFloat(emp_data[i].laborForceSept2020);
+                            toolTip.html('Labor Force: ' + emp_data[i].laborForceSept2020 +
+                                '</br>Labor force percentile: ' + parseFloat(emp_data[i].totalJobCountPercentile * 100).toFixed(2))
+                                .style("left", (d3.event.pageX + 20) + "px")
+                                .style("top", (d3.event.pageY - 30) + "px");
+                        }
+                        else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            value = parseFloat(emp_data[i].topEmployerJobsPercentile);
+                            toolTip.html('Top Employer job count: ' + emp_data[i].topEmployerJobs +
+                                '</br>Top Employer: ' + emp_data[i].topEmployer+
+                                '</br>Top Employer percentile: ' + parseFloat(emp_data[i].topEmployerJobsPercentile * 100).toFixed(2) )
+                                .style("left", (d3.event.pageX + 20) + "px")
+                                .style("top", (d3.event.pageY - 30) + "px");
+                        }
+                    }
+
+                    toolTip.transition()
+                        .duration(50)
+                        .style("opacity", 1);
+                })
+                .on('mouseout', function (d, i) {
+                    let value = 0;
+                    d3.select(this).style('fill', '#de0404');
+                    toolTip.transition()
+                        .duration('50')
+                        .style("opacity", 0);
+                });;
 		});
     };
     d3.csv("Project 2 Employment Data.csv", function (data) {
