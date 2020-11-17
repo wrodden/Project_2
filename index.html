@@ -7,11 +7,13 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="../Documentation.html">Documentation</a>
-        <a href="../index.html">Graphs</a>
+        <a href="../Project_2/Documentation.html">Documentation</a>
+        <a href="../Project_2/index.html">Graphs</a>
     </div>
     <div class="row">
-        <div class="column left" style="background-color:aqua"></div>
+        <div class="column left" style="background-color:aqua">
+            <svg id="RankingsChart"></svg>
+        </div>
         <div class="column middle">
             <input type="radio" name="costType" id="costIndex" checked="checked" value="costIndex">Overall Cost
             <input type="radio" name="costType" id="totalJobCount" value="totalJobCount">Total Job Count
@@ -21,7 +23,9 @@
             <div id="legend1" style="height:100px"></div>
             <svg id="map-target"></svg>
         </div>
-        <div class="column right"></div>
+        <div class="column right">
+            <svg id="CompareChart"></svg>
+        </div>
     </div>
 
 </body>

@@ -1,13 +1,11 @@
-
-    let emp_data = [];
-
+let emp_data = [];
 function drawFirstMap(type) {
     $("#map-target").empty();
         var width = 720,
             height = 500;
 
         var projection = d3.geoAlbers()
-            .scale(1000)
+            .scale(500)
             .translate([width / 2, height / 2]);
 
         var path = d3.geoPath()
@@ -20,7 +18,7 @@ function drawFirstMap(type) {
 
         var key = d3.select("#legend1")
             .append("svg")
-            .attr("width", 300)
+            .attr("width", width)
             .attr("height", 50);
 
 
@@ -203,7 +201,7 @@ function drawFirstMap(type) {
                                 .style("top", (d3.event.pageY - 30) + "px");
                         }
                     }
-
+                    fillCompareChart(d.id)
                     toolTip.transition()
                         .duration(50)
                         .style("opacity", 1);
@@ -216,8 +214,65 @@ function drawFirstMap(type) {
                         .style("opacity", 0);
                 });;
 		});
-    };
-    d3.csv("Project 2 Employment Data.csv", function (data) {
+};
+
+function fillCompareChart(stateId) {
+    $("#CompareChart").empty();
+    let svg = d3.select("#CompareChart");
+
+
+     let xScale = d3.scaleBand().range([0, 200]).padding(.5);
+     let yScale = d3.scaleLinear().range([600, 0]);
+
+    xScale.domain(['Cost Index', 'Total Job Count', 'Unemployment', 'Labor Force', 'Top Employee Jobs']);
+    yScale.domain([0,100]);
+    let g = svg.append("g")
+        .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
+
+    g.append("g")
+        .attr("transform", "translate(0," + 600 + ")")
+        .call(d3.axisBottom(xScale));
+
+    let data = []
+    for (var i in emp_data) {
+        if (parseInt(emp_data[i].id) == parseInt(stateId)) {
+            data.push({ text: 'Cost Index', value: parseFloat(emp_data[i].costIndexPercentile)*100,column:1 });
+            data.push({ text: 'Total Job Count', value: parseFloat(emp_data[i].totalJobCountPercentile)*100,column: 2 });
+            data.push({ text: 'Unemployment', value: parseFloat(emp_data[i].uePercSept2020Percentile) * 100,column: 3 });
+            data.push({ text: 'Labor Force', value: parseFloat(emp_data[i].laborForceSept2020) * 100,column: 4 });
+            data.push({ text: 'Top Employee Jobs', value: parseFloat(emp_data[i].topEmployerJobsPercentile) * 100,column: 5 });
+        }
+    }
+
+    g.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d) { return xScale(d.text); })
+        .attr("y", function (d) { return yScale(d.value); })
+        .attr("width", xScale.bandwidth())
+        .attr("height", function (d) { return 600 - yScale(d.value); });
+        g.selectAll("text")
+        .attr("y", 0)
+        .attr("x", 9)
+        .attr("dy", ".35em")
+        .attr("transform", "rotate(90)")
+        .style("text-anchor", "start");
+
+    g.append("g")
+        .append("text")
+        .attr("y", 0)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text(" percentile ")
+        .attr("transform", "rotate(-90)");
+    g.append("g")
+        .call(d3.axisLeft(yScale).tickFormat(function (d) {
+            return d + "%";
+        }).ticks(10));
+}
+d3.csv("Project 2 Employment Data.csv", function (data) {
         for (let counter = 0; counter < data.length;counter++) {
 
             let state = data[counter].State;
