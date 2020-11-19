@@ -109,7 +109,7 @@ function drawFirstMap(type) {
     else if (type == 'uePercSept2020Percentile') {
         l = 'Unemployment Lowest to Highest';
     }
-    else if (type == 'laborForceSept2020') {
+    else if (type == 'laborForceSept2020Percentile') {
         l = 'Total labor force Lowest to Highest';
     }
     else if (type == 'topEmployerJobs') {
@@ -151,8 +151,8 @@ function drawFirstMap(type) {
                     else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         return parseFloat(emp_data[i].uePercSept2020Percentile);
                     }
-                    else if (type == 'laborForceSept2020' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        return parseFloat(emp_data[i].laborForceSept2020);
+                    else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        return parseFloat(emp_data[i].laborForceSept2020Percentile);
                     }
                     else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         return parseFloat(emp_data[i].topEmployerJobsPercentile);
@@ -185,10 +185,10 @@ function drawFirstMap(type) {
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
-                    else if (type == 'laborForceSept2020' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        value = parseFloat(emp_data[i].laborForceSept2020);
+                    else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].laborForceSept2020Percentile);
                         toolTip.html('Labor Force: ' + emp_data[i].laborForceSept2020 +
-                            '</br>Labor force percentile: ' + parseFloat(emp_data[i].totalJobCountPercentile * 100).toFixed(2))
+                            '</br>Labor force percentile: ' + parseFloat(emp_data[i].laborForceSept2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
@@ -240,7 +240,7 @@ function fillCompareChart(stateId) {
             data.push({ text: 'Cost Index', value: parseFloat(emp_data[i].costIndexPercentile)*100,column:1 });
             data.push({ text: 'Total Job Count', value: parseFloat(emp_data[i].totalJobCountPercentile)*100,column: 2 });
             data.push({ text: 'Unemployment', value: parseFloat(emp_data[i].uePercSept2020Percentile) * 100,column: 3 });
-            data.push({ text: 'Labor Force', value: parseFloat(emp_data[i].laborForceSept2020) * 100,column: 4 });
+            data.push({ text: 'Labor Force', value: parseFloat(emp_data[i].laborForceSept2020Percentile) * 100,column: 4 });
             data.push({ text: 'Top Employee Jobs', value: parseFloat(emp_data[i].topEmployerJobsPercentile) * 100,column: 5 });
         }
     }
@@ -305,6 +305,7 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
             let totalJobCount = data[counter].TotalJobCount;
             let topEmployerJobsPercentile = data[counter].TopEmployerJobsPercentile;
             let totalJobCountPercentile = data[counter].TotalJobCountPercentile;
+            let laborForceSept2020Percentile = data[counter].LaborForceSept2020Percentile;
             let id = data[counter].id;
 
 
@@ -335,6 +336,7 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
                 totalJobCount: totalJobCount,
                 topEmployerJobsPercentile: topEmployerJobsPercentile,
                 totalJobCountPercentile: totalJobCountPercentile,
+                laborForceSept2020Percentile: laborForceSept2020Percentile,
                 id: id
             });
         };
