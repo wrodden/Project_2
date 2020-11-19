@@ -1,8 +1,13 @@
 let emp_data = [];
+
+var key = d3.select("#legend1")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", 50);
+var width = 720,
+    height = 500;
 function drawFirstMap(type) {
     $("#map-target").empty();
-    var width = 720,
-        height = 500;
 
     var projection = d3.geoAlbers()
         .scale(500)
@@ -15,11 +20,6 @@ function drawFirstMap(type) {
         .attr("width", width)
         .attr("height", height);
 
-
-    var key = d3.select("#legend1")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", 50);
 
 
     var legend = key.append("defs")
