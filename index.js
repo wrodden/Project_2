@@ -166,35 +166,35 @@ function drawFirstMap(type) {
                 for (var i in emp_data) {
                     if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].costIndexPercentile);
-                        toolTip.html(' Cost rank: ' + emp_data[i].costRank +
+                        toolTip.html( emp_data[i].state + '<br> Cost rank: ' + emp_data[i].costRank +
                             '</br>Cost index percentile: ' + parseFloat(emp_data[i].costIndexPercentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
                     else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].totalJobCountPercentile);
-                        toolTip.html('Total job count: ' + emp_data[i].totalJobCount +
+                        toolTip.html(emp_data[i].state + '<br> Total job count: ' + emp_data[i].totalJobCount +
                             '</br>Cost index percentile: ' + parseFloat(emp_data[i].totalJobCountPercentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
                     else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html('Unemployment: ' + emp_data[i].ueSept2020 +
+                        toolTip.html(emp_data[i].state + '<br> Unemployment: ' + emp_data[i].ueSept2020 +
                             '</br>Unemployment percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
                     else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].laborForceSept2020Percentile);
-                        toolTip.html('Labor Force: ' + emp_data[i].laborForceSept2020 +
+                        toolTip.html(emp_data[i].state + '<br> Labor Force: ' + emp_data[i].laborForceSept2020 +
                             '</br>Labor force percentile: ' + parseFloat(emp_data[i].laborForceSept2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
                     else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].topEmployerJobsPercentile);
-                        toolTip.html('Top Employer job count: ' + emp_data[i].topEmployerJobs +
+                        toolTip.html(emp_data[i].state + '<br> Top Employer job count: ' + emp_data[i].topEmployerJobs +
                             '</br>Top Employer: ' + emp_data[i].topEmployer +
                             '</br>Top Employer percentile: ' + parseFloat(emp_data[i].topEmployerJobsPercentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
