@@ -180,8 +180,8 @@ function drawFirstMap(type) {
                     }
                     else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment: ' + emp_data[i].ueSept2020 +
-                            '</br>Unemployment percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
+                        toolTip.html(emp_data[i].state + '<br> Change in Unemployment: ' + emp_data[i].ueSept2020 +
+                            '</br> Change in Unemployment percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
