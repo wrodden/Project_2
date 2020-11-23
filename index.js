@@ -576,6 +576,9 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
         let utilitiesCost = data[counter].utilitiesCost
         let MedianMaxSalary = data[counter].MedianMaxSalary
         let MedianMinSalary = data[counter].MedianMinSalary
+		let Top1 = data[counter].Top1
+		let Top2 = data[counter].Top2
+		let Top3 = data[counter].Top3
 
         emp_data.push({
             state: state,
@@ -610,7 +613,10 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
             groceryCost: groceryCost,
             utilitiesCost: utilitiesCost,
             MedianMaxSalary: MedianMaxSalary,
-            MedianMinSalary: MedianMinSalary
+            MedianMinSalary: MedianMinSalary,
+			Top1: Top1,
+			Top2: Top2,
+			Top3: Top3
         });
     };
     console.log(emp_data);
