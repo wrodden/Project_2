@@ -28,26 +28,31 @@ div.tooltip-donut {
     border: 1px solid #313639;
     border-radius: 8px;
     pointer-events: none;
-    font-size: 1.3rem;
+    font-size: 12px;
     z-index: 9;
 }
 body {
     margin: 0;
     height:100%;
-}
-html{
-    height:100%;
-}
-svg {
-    width: 100vw;
-    height: 100vh;
+    /* background-color:  #333 !important; */
+    font-family: "Montserrat" !important;
+    background-image: linear-gradient( 135deg, #F05F57 10%, #360940 100%);
+
+    /*Remove if issues*/
+    display: table !important;
+    margin: 0 auto !important;
 }
 
-path {
+
+text {
+    font-family: 'Montserrat';
+}
+
+/* path {
     fill: #ccc;
     stroke: black;
     stroke-width: .2;
-}
+} */
 
 #borders {
     fill: none;
@@ -64,9 +69,6 @@ path {
     shape-rendering: crispEdges;
 }
 
-svg {
-    padding-left: 50px;
-}
 .state-borders {
     fill: none;
     stroke: #fff;
@@ -76,9 +78,9 @@ svg {
     pointer-events: none;
 }
 
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
 /* Create three unequal columns that floats next to each other */
 .column {
@@ -105,9 +107,12 @@ svg {
 .middle {
     width: 60%;
 }
-.row{
-    height:100%;
+
+.row {
+     margin-right: 0px !important;
+     margin-left: 0px !important;
 }
+
 /* Clear floats after the columns */
 .row:after {
     content: "";
@@ -115,3 +120,47 @@ svg {
     clear: both;
 }
 
+.bar { fill: #de0404;
+opacity: 0.7; }
+
+.bar:hover {
+    fill: orange !important;
+    opacity: 1;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin-right: 3px;
+    margin-left: 16px;
+}
+
+.card {
+    margin: 12px !important;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.details {
+    font-size: 14px !important;
+}
+
+.line {
+    fill: none;
+    stroke: orange !important;
+    stroke-width: 4px;
+    opacity: 1;
+  }
+  
+  .axisSteelBlue text{
+    fill: steelblue;
+  }
+  
+  .axisRed text{
+    fill: #de0404;
+  }
+  
