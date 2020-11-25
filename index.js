@@ -132,7 +132,7 @@ function drawFirstMap(type) {
         var featureCollection = topojson.feature(us, us.objects.states);
 
         var projection = d3.geoIdentity()
-            .fitExtent([[50, 50], [500 - 50, 400 - 50]], featureCollection)
+            .fitExtent([[1, 1], [580 - 60, 400 - 60]], featureCollection)
 
         var path = d3.geoPath().projection(projection)
 
@@ -173,6 +173,7 @@ function drawFirstMap(type) {
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
                         $('#top-emp').html(emp_data[i].topEmployer);
                         $('#median-sal').html("$" + emp_data[i].MedianMaxSalary);
+                        $('#job-cnt').html(parseInt(emp_data[i].totalJobCount));
                     }
                     
 
@@ -242,6 +243,7 @@ function drawFirstMap(type) {
 
                 $('#top-emp').html("—");
                 $('#median-sal').html("—");
+                $('#job-cnt').html("—");
                 let value = 0;
                 d3.select(this).style('fill', '#de0404');
                 toolTip.transition()
@@ -253,8 +255,8 @@ function drawFirstMap(type) {
                 drawDual(d.id)
                 for (var i in emp_data) {
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#bar-heading').html('Cost Analysis — ' + emp_data[i].state);
-                        $('#dual-heading').html('Employment Trend — ' + emp_data[i].state);
+                        $('#bar-heading').html('Cost of Living — ' + emp_data[i].state);
+                        $('#dual-heading').html('Macro Economic Variables — ' + emp_data[i].state);
                     }
                 }                
             })
@@ -370,17 +372,17 @@ for (let index = 0; index < emp_data.length; index++) {
             "line1": parseFloat(emp_data[index].uePercSept2019)
         })
         data.push({
-            "year": "Last 6 Months",
+            "year": "Three Months",
             "bar": parseInt(emp_data[index].laborForceJuly2020),
             "line1": parseFloat(emp_data[index].uePercJuly2020)
         })
         data.push({
-            "year": "Last Month",
+            "year": "Two Months",
             "bar": parseInt(emp_data[index].laborForceAug2020),
             "line1": parseFloat(emp_data[index].uePercAug2020)
         })
         data.push({
-            "year": "Today",
+            "year": "Current Month",
             "bar": parseInt(emp_data[index].laborForceSept2020),
             "line1": parseFloat(emp_data[index].uePercSept2020)
         })
@@ -428,15 +430,15 @@ rect.enter().append("rect")
 var points2 = svg.selectAll("circle.point2")
   .data(data)
       
-points2.enter().append("circle")
-  .merge(points2)
-  .attr("class", "point2")
-  .style("stroke", "crimson")
-  .style("stroke-width", 3)
-      .style("fill", "none")
-  .attr("cx", function(d){ return xLine(d.year); })
-  .attr("cy", function(d){ return yLine(d.line1); })
-  .attr("r", function(d){ return 10; });
+// points2.enter().append("circle")
+//   .merge(points2)
+//   .attr("class", "point2")
+//   .style("stroke", "crimson")
+//   .style("stroke-width", 3)
+//       .style("fill", "none")
+//   .attr("cx", function(d){ return xLine(d.year); })
+//   .attr("cy", function(d){ return yLine(d.line1); })
+//   .attr("r", function(d){ return 10; });
 
 var points1 = svg.selectAll("circle.point1")
   .data(data)

@@ -12,31 +12,37 @@
         <div class="column">
             <!-- <div id="legend1" style="height:100px"></div> -->
             <div class="row">
-                <div class="card" style="width: 12rem;">
+                <div class="card" style="width: 8.5rem;">
+                    <div class="card-body">
+                        <p class="card-text">Job Count</p>
+                        <p id="job-cnt" class="card-text details">—</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 8.5rem;">
                     <div class="card-body">
                         <p class="card-text">Top Employer</p>
                         <p id="top-emp" class="card-text details">—</p>
                     </div>
                 </div>
-                <div class="card" style="width: 12rem;">
+                <div class="card" style="width: 8.5rem;">
                     <div class="card-body">
                         <p class="card-text">Median Salary</p>
                         <p id="median-sal" class="card-text details">—</p>
                     </div>
                 </div>
-                <div class="card" style="width: 12rem;">
+                <div class="card" style="width: 8.5rem;">
                     <div class="card-body">
                         <p class="card-text">Similar States</p>
                         <p id="sim-state" class="card-text details">—</p>
                     </div>
                 </div>
             </div>
-            <div class="card" style="width: 39rem;">
+            <div class="card" style="width: 38.5rem;">
                 <div class="card-body">
                     <input type="radio" name="costType" id="uePercSept2020Percentile" checked="checked"
-                    value="uePercSept2020Percentile">Unemployment
-                    <input type="radio" name="costType" id="costIndex" value="costIndex">Overall Cost
-            <input type="radio" name="costType" id="totalJobCount" value="totalJobCount">Total Job Count
+                    value="uePercSept2020Percentile"><span class="radio-text">Unemployment</span>
+                    <input type="radio" name="costType" id="costIndex" value="costIndex"><span class="radio-text">Overall Cost</span>
+            <input type="radio" name="costType" id="totalJobCount" value="totalJobCount"><span class="radio-text">Total Job Count</span>
             <!-- <input type="radio" name="costType" id="laborForceSept2020" value="laborForceSept2020Percentile">Labor Force
             <input type="radio" name="costType" id="topEmployerJobs" value="topEmployerJobs">Top Employer Jobs -->
                     <svg id="map-target"></svg>
