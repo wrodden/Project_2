@@ -174,7 +174,8 @@ function drawFirstMap(type) {
                         $('#top-emp').html(emp_data[i].topEmployer);
                         $('#median-sal').html("Salary Range: $" + emp_data[i].MedianMinSalary + " - $"+emp_data[i].MedianMaxSalary);
                         $('#job-cnt').html("Job Count: "+parseInt(emp_data[i].totalJobCount));
-						$('#unemployment').html("Unemployment :"+emp_data[i].uePercSept2020+"%");
+						$('#unemployment').html("Unemployment: "+emp_data[i].uePercSept2020+"%");
+						$('#cost-index').html("Cost Index: "emp_data[i].costIndex);
 						$('#sim-state1').html(emp_data[i].Top1);
 						$('#sim-state2').html(emp_data[i].Top2);
 						$('#sim-state3').html(emp_data[i].Top3);
@@ -252,6 +253,7 @@ function drawFirstMap(type) {
                 })
 
                 $('#top-emp').html("—");
+				$('#cost-index').html("—");
                 $('#median-sal').html("—<br><br>—");
                 $('#job-cnt').html("—");
 				$('#unemployment').html("—");
