@@ -247,7 +247,7 @@ function drawFirstMap(type) {
                 })
 
                 $('#top-emp').html("—");
-                $('#median-sal').html("—");
+                $('#median-sal').html("—<br><br>—");
                 $('#job-cnt').html("—");
                 let value = 0;
                 d3.select(this).style('fill', '#de0404');
