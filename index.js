@@ -250,10 +250,7 @@ function drawFirstMap(type) {
                 })
 
                 $('#top-emp').html("—");
-				$('#cost-index').html("—");
-                $('#median-sal').html("—<br><br>—");
-                $('#job-cnt').html("—");
-				$('#unemployment').html("—");
+                $('#median-sal').html("—<br>—<br>—<br>—<br>—");
 				$('#sim-state1').html("—");
 				$('#sim-state2').html("—");
 				$('#sim-state3').html("—");
