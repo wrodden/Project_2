@@ -168,15 +168,6 @@ function drawFirstMap(type) {
                 d3.select(this).style('opacity', 1);
                 let value = ""
                 for (var i in emp_data) {
-
-
-                    if (parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#top-emp').html(emp_data[i].topEmployer);
-                        $('#median-sal').html("Salary Range: $" + emp_data[i].MedianMinSalary + " - $"+emp_data[i].MedianMaxSalary+"<br>Job Count: "+parseInt(emp_data[i].totalJobCount)+"<br>Unemployment: "+emp_data[i].uePercSept2020+"%"+"<br>Cost Index: "+emp_data[i].costIndex);
-						$('#sim-state1').html(emp_data[i].Top1);
-						$('#sim-state2').html(emp_data[i].Top2);
-						$('#sim-state3').html(emp_data[i].Top3);
-                    }
                     
 
 
@@ -222,7 +213,6 @@ function drawFirstMap(type) {
                     // }
                 
                 }
-                fillCompareChart(d.id)
                 toolTip.transition()
                     .duration(50)
                     .style("opacity", 1);
@@ -249,11 +239,11 @@ function drawFirstMap(type) {
                     }
                 })
 
-                $('#top-emp').html("—");
-                $('#median-sal').html("—<br>—<br>—<br>—<br>—");
-				$('#sim-state1').html("—");
-				$('#sim-state2').html("—");
-				$('#sim-state3').html("—");
+                //$('#top-emp').html("—");
+               // $('#median-sal').html("—<br>—<br>—<br>—<br>—");
+				//$('#sim-state1').html("—");
+				//$('#sim-state2').html("—");
+				//$('#sim-state3').html("—");
                 let value = 0;
                 d3.select(this).style('fill', '#de0404');
                 toolTip.transition()
@@ -261,6 +251,45 @@ function drawFirstMap(type) {
                     .style("opacity", 0);
             })
             .on('click', function (d, i) {
+                for (var i in emp_data) {
+
+
+                    if (parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#top-emp').html(emp_data[i].topEmployer);
+                        $('#median-sal').html("Salary Range: $" + emp_data[i].MedianMinSalary + " - $" + emp_data[i].MedianMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].totalJobCount) + "<br>Unemployment: " + emp_data[i].uePercSept2020 + "%" + "<br>Cost Index: " + emp_data[i].costIndex);
+                        $('#sim-state1').html(emp_data[i].Top1);
+                        $('#sim-state2').html(emp_data[i].Top2);
+                        $('#sim-state3').html(emp_data[i].Top3);
+                    }
+
+
+
+                    if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].costIndexPercentile);
+                        toolTip.html(emp_data[i].state + '<br> Cost Rank: ' + emp_data[i].costRank +
+                            '</br>Cost Index percentile: ' + parseFloat(emp_data[i].costIndexPercentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
+
+                    else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].totalJobCountPercentile);
+                        toolTip.html(emp_data[i].state + '<br> Total job count: ' + emp_data[i].totalJobCount +
+                            '</br>Total Job Count Percentile:' + parseFloat(emp_data[i].totalJobCountPercentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
+
+                    else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].uePercSept2020Percentile);
+                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].ueSept2020 +
+                            '</br> Unemployemnt Rate Percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
+
+                }
+                fillCompareChart(d.id)
                 drawBarChart(d.id);
                 drawDual(d.id)
                 for (var i in emp_data) {
@@ -527,7 +556,7 @@ function drawBarChart(_id) {
     });
 
     // Scale the range of the data in the domains
-    x.domain([0, d3.max(data, function (d) { return d.value; })])
+    x.domain([0, 160])
     y.domain(data.map(function (d) { return d.key; }));
     //y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
