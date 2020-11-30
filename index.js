@@ -172,7 +172,7 @@ function drawFirstMap(type) {
 
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
                         $('#top-emp').html(emp_data[i].topEmployer);
-                        $('#median-sal').html("Salary Range: $" + emp_data[i].MedianMinSalary + " - $"+emp_data[i].MedianMaxSalary+"<br>Job Count: "+parseInt(emp_data[i].totalJobCount)+"<br>Unemployment: "+emp_data[i].uePercSept2020+"%"+"<br>Cost Index: "emp_data[i].costIndex);
+                        $('#median-sal').html("Salary Range: $" + emp_data[i].MedianMinSalary + " - $"+emp_data[i].MedianMaxSalary+"<br>Job Count: "+parseInt(emp_data[i].totalJobCount)+"<br>Unemployment: "+emp_data[i].uePercSept2020+"%"+"<br>Cost Index: "+emp_data[i].costIndex);
                         $('#job-cnt').html("<br>Job Count: "+parseInt(emp_data[i].totalJobCount));
 						$('#unemployment').html("<br>Unemployment: "+emp_data[i].uePercSept2020+"%");
 						$('#cost-index').html("<br>Cost Index: "+emp_data[i].costIndex);
