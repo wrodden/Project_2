@@ -161,7 +161,7 @@ function drawFirstMap(type) {
                         return parseFloat(emp_data[i].topEmployerJobsPercentile);
                     }
                 }
-            }).on('mouseover', function (d, i) {
+            }).on('click', function (d, i) {
 
                 var currentState = this;
                 d3.select(this).style('fill', 'orange');
@@ -224,27 +224,27 @@ function drawFirstMap(type) {
                     .duration(50)
                     .style("opacity", 1);
             })
-            .on('mouseout', function (d, i) {
+            //.on('mouseout', function (d, i) {
 
-                d3.select(this).style("opacity", function (d) {
-                    for (var i in emp_data) {
-                        if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                            return parseFloat(emp_data[i].costIndexPercentile);
-                        }
-                        else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                            return parseFloat(emp_data[i].totalJobCountPercentile);
-                        }
-                        else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                            return parseFloat(emp_data[i].uePercSept2020Percentile);
-                        }
-                        else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                            return parseFloat(emp_data[i].laborForceSept2020Percentile);
-                        }
-                        else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                            return parseFloat(emp_data[i].topEmployerJobsPercentile);
-                        }
-                    }
-                })
+              //  d3.select(this).style("opacity", function (d) {
+                //    for (var i in emp_data) {
+                  //      if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                    //        return parseFloat(emp_data[i].costIndexPercentile);
+                      //  }
+              //          else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+              //              return parseFloat(emp_data[i].totalJobCountPercentile);
+              //          }
+               //         else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+               //             return parseFloat(emp_data[i].uePercSept2020Percentile);
+               //         }
+               //         else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+               //             return parseFloat(emp_data[i].laborForceSept2020Percentile);
+               //         }
+               //         else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+               //             return parseFloat(emp_data[i].topEmployerJobsPercentile);
+               //         }
+                    //}
+                //})
 
                 $('#top-emp').html("—");
                 $('#median-sal').html("—");
