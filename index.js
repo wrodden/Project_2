@@ -174,6 +174,9 @@ function drawFirstMap(type) {
                         $('#top-emp').html(emp_data[i].topEmployer);
                         $('#median-sal').html("Median Salary Range: $" + emp_data[i].MedianMinSalary + " - $"+emp_data[i].MedianMaxSalary);
                         $('#job-cnt').html("Job Count: "+parseInt(emp_data[i].totalJobCount));
+						$('#sim-state1').html(emp_data[i].Top1);
+						$('#sim-state2').html(emp_data[i].Top2);
+						$('#sim-state3').html(emp_data[i].Top3);
                     }
                     
 
@@ -201,6 +204,7 @@ function drawFirstMap(type) {
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
+					
 
                     // else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                     //     value = parseFloat(emp_data[i].laborForceSept2020Percentile);
