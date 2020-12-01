@@ -521,7 +521,7 @@ function drawBarChart(_id) {
         if (emp_data[index].id == _id) {
             data.push({ "key": "Cost Index", "value": emp_data[index].costIndex })
             data.push({ "key": "Misc. Cost", "value": emp_data[index].miscCost })
-            data.push({ "key": "Transpotation Cost", "value": emp_data[index].transportationCost })
+            data.push({ "key": "Transportation Cost", "value": emp_data[index].transportationCost })
             data.push({ "key": "Grocery Cost", "value": emp_data[index].groceryCost })
             data.push({ "key": "Utilities Cost", "value": emp_data[index].utilitiesCost })
         }
