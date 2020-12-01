@@ -504,10 +504,10 @@ svg.append("g")
   .call(d3.axisLeft(yBar));
 
 // Add the Y1 Axis
-svg.append("g")
-  .attr("class", "axisSteelBlue")
-  .attr("transform", "translate( " + width + ", 0 )")
-  .call(d3.axisRight(yLine));
+//svg.append("g")
+//  .attr("class", "axisSteelBlue")
+//  .attr("transform", "translate( " + width + ", 0 )")
+//  .call(d3.axisRight(yLine));
 
 
 }
