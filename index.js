@@ -512,12 +512,12 @@ svg.append("text")
       .style("text-anchor", "middle")
       .text("Percent Unemployed"); 
 	  
-svg.append("text")             
-      .attr("transform",
-            "translate(" + (width/2) + " ," + 
-                           (height + margin.top + 20) + ")")
-      .style("text-anchor", "middle")
-      .text(data.state);
+//svg.append("text")             
+//      .attr("transform",
+//            "translate(" + (width/2) + " ," + 
+//                           (height + margin.top + 20) + ")")
+//      .style("text-anchor", "middle")
+//      .text(data.state);
 
 // Add the Y1 Axis
 //svg.append("g")
