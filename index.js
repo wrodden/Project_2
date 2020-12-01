@@ -452,19 +452,19 @@ svg.append("path")
 //   .style("stroke", "crimson")
 //   .attr("d", valueline2);
 
-var rect = svg.selectAll("rect")
-  .data(data)
+//var rect = svg.selectAll("rect")
+//  .data(data)
       
-rect.enter().append("rect")
-  .merge(rect)
-  .attr("class", "bar")
-  .style("stroke", "none")
-  .style("fill", "#de0404")
-  .style("opacity", "0.7")
-  .attr("x", function(d){ return xBar(d.year); })
-  .attr("width", function(d){ return xBar.bandwidth(); })
-  .attr("y", function(d){ return yBar(d.bar); })
-  .attr("height", function(d){ return height - yBar(d.bar); });
+//rect.enter().append("rect")
+ // .merge(rect)
+//  .attr("class", "bar")
+//  .style("stroke", "none")
+//  .style("fill", "#de0404")
+//  .style("opacity", "0.7")
+//  .attr("x", function(d){ return xBar(d.year); })
+//  .attr("width", function(d){ return xBar.bandwidth(); })
+ // .attr("y", function(d){ return yBar(d.bar); })
+//  .attr("height", function(d){ return height - yBar(d.bar); });
 
 
 var points2 = svg.selectAll("circle.point2")
@@ -505,7 +505,7 @@ svg.append("g")
 
 // Add the Y1 Axis
 svg.append("g")
-  .attr("class", "axisRed")
+  .attr("class", "axisSteelBlue")
   .attr("transform", "translate( " + width + ", 0 )")
   .call(d3.axisRight(yLine));
 
