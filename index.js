@@ -419,7 +419,8 @@ for (let index = 0; index < emp_data.length; index++) {
         data.push({
             "year": "Aug 2020",
             "bar": parseInt(emp_data[index].uePercAug2020),
-            "line1": parseFloat(emp_data[index].uePercAug2020)
+            "line1": parseFloat(emp_data[index].uePercAug2020),
+			"state" :emp_data[index].state
         })
         data.push({
             "year": "Sept 2020",
@@ -509,7 +510,14 @@ svg.append("text")
       .attr("x",0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Value"); 
+      .text("Unemployment Percentage"); 
+	  
+svg.append("text")             
+      .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height + margin.top + 20) + ")")
+      .style("text-anchor", "middle")
+      .text(data.state);
 
 // Add the Y1 Axis
 //svg.append("g")
