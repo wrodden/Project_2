@@ -637,8 +637,19 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
 		let Top1 = data[counter].Top1
 		let Top2 = data[counter].Top2
 		let Top3 = data[counter].Top3
+		let TEMaxSalary = data[counter].TESalaryRangeMaximum
+		let TEMinSalary = data[counter].TESalaryRangeMinimum
+		let TERating = data[counter].CompanyRating2
+		let StateEmployerRating = data[counter].StateEmployerRating
+
+		
+
 
         emp_data.push({
+			TEMaxSalary:TEMaxSalary,
+			TEMinSalary:TEMinSalary,
+			TERating:TERating,
+			StateEmployerRating:StateEmployerRating,
             state: state,
             costIndex: costIndex,
             costRank: costRank,
