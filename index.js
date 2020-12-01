@@ -510,7 +510,7 @@ svg.append("text")
       .attr("x",0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Unemployment Percentage"); 
+      .text("Unemployment %"); 
 	  
 svg.append("text")             
       .attr("transform",
