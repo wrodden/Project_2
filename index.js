@@ -256,7 +256,7 @@ function drawFirstMap(type) {
 
 
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#top-emp').html(emp_data[i].topEmployer);
+                        $('#top-emp').html(emp_data[i].topEmployer+"<br>Salary Range: <br>" + emp_data[i].TEMinSalary + " - " + emp_data[i].TEMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].topEmployerJobs) + "<br>Rating: " + emp_data[i].TERating + " on Glassdoor");
                         $('#median-sal').html("Salary Range: <br>" + emp_data[i].MedianMinSalary + " - " + emp_data[i].MedianMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].totalJobCount) + "<br>Unemployment: " + emp_data[i].uePercSept2020 + "%" + "<br>Cost Index: " + emp_data[i].costIndex);
                         $('#sim-state1').html(emp_data[i].Top1);
                         $('#sim-state2').html(emp_data[i].Top2);
