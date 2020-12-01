@@ -408,22 +408,22 @@ for (let index = 0; index < emp_data.length; index++) {
     if(emp_data[index].id == _id){
         data.push({
             "year": "Sept 2019",
-            "bar": parseInt(emp_data[index].laborForceSept19),
+            "bar": parseInt(emp_data[index].uePercSept2019),
             "line1": parseFloat(emp_data[index].uePercSept2019)
         })
         data.push({
             "year": "July 2020",
-            "bar": parseInt(emp_data[index].laborForceJuly2020),
+            "bar": parseInt(emp_data[index].uePercJuly2020),
             "line1": parseFloat(emp_data[index].uePercJuly2020)
         })
         data.push({
             "year": "Aug 2020",
-            "bar": parseInt(emp_data[index].laborForceAug2020),
+            "bar": parseInt(emp_data[index].uePercAug2020),
             "line1": parseFloat(emp_data[index].uePercAug2020)
         })
         data.push({
             "year": "Sept 2020",
-            "bar": parseInt(emp_data[index].laborForceSept2020),
+            "bar": parseInt(emp_data[index].uePercSept2020),
             "line1": parseFloat(emp_data[index].uePercSept2020)
         })
         console.log(data)
