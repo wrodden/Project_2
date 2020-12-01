@@ -296,7 +296,7 @@ function drawFirstMap(type) {
                 for (var i in emp_data) {
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
                         $('#bar-heading').html('Cost of Living — ' + emp_data[i].state);
-                        $('#dual-heading').html('Employment Trends — ' + emp_data[i].state);
+                        $('#dual-heading').html('Unemployment Trends (Sept 2019 to Sept 2020) <br> ' + emp_data[i].state);
                     }
                 }                
             })
