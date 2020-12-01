@@ -189,7 +189,7 @@ function drawFirstMap(type) {
 
                     else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePercSept2020 +
+                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePercSept2020 + "%"+
                             '</br> Unemployment Rate Percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
@@ -283,7 +283,7 @@ function drawFirstMap(type) {
 
                     else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePercSept2020 +
+                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePercSept2020 + "%"+
                             '</br> Unemployemnt Rate Percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
