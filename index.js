@@ -703,6 +703,5 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
     fillLegend();
 });
 $('input[type=radio][name=costType]').change(function () {
-    fillRankings(this.value);
     drawFirstMap(this.value);
 });
