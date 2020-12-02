@@ -581,7 +581,7 @@ function drawBarChart(_id) {
     });
 
     // Scale the range of the data in the domains
-    x.domain([0, 160])
+    x.domain([0, 200])
     y.domain(data.map(function (d) { return d.key; }));
     //y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
