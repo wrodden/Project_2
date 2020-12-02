@@ -1,9 +1,6 @@
 let emp_data = [];
 
-var key = d3.select("#legend1")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", 50);
+
 var width = 520,
     height = 340;
 function drawFirstMap(type) {
@@ -20,112 +17,12 @@ function drawFirstMap(type) {
         .attr("width", width)
         .attr("height", height);
 
-    // var legend = key.append("defs")
-    //     .append("svg:linearGradient")
-    //     .attr("id", "gradient")
-    //     .attr("x1", "0%")
-    //     .attr("y1", "100%")
-    //     .attr("x2", "100%")
-    //     .attr("y2", "100%")
-    //     .attr("spreadMethod", "pad");
-    // legend.append("stop")
-    //     .attr("offset", "0%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", 0);
-
-    // legend.append("stop")
-    //     .attr("offset", "10%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .10);
-
-    // legend.append("stop")
-    //     .attr("offset", "20%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .2);
-
-    // legend.append("stop")
-    //     .attr("offset", "40%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .3);
-    // legend.append("stop")
-    //     .attr("offset", "50%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .4);
-    // legend.append("stop")
-    //     .attr("offset", "60%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .5);
-    // legend.append("stop")
-    //     .attr("offset", "70%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .6);
-    // legend.append("stop")
-    //     .attr("offset", "80%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .7);
-    // legend.append("stop")
-    //     .attr("offset", "90%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .8);
-    // legend.append("stop")
-    //     .attr("offset", "100%")
-    //     .attr("stop-color", "#de0404")
-    //     .attr("stop-opacity", .9);
-
-
-    // key.append("rect")
-    //     .attr("width", 300)
-    //     .attr("height", 50 - 30)
-    //     .style("fill", "url(#gradient)")
-    //     .attr("transform", "translate(0,10)");
-
-    // var y = d3.scaleLinear()
-    //     .range([300, 0])
-    //     .domain([50, 1]);
-
-    // var yAxis = d3.axisBottom()
-    //     .scale(y)
-    //     .ticks(5);
-
-    // key.append("g")
-    //     .attr("class", "y axis")
-    //     .attr("transform", "translate(0,30)")
-    //     .call(yAxis)
-    //     .append("text")
-    //     .attr("transform", "rotate(-90)")
-    //     .attr("y", 0)
-    //     .attr("dy", ".71em")
-    //     .style("text-anchor", "end")
-    //     .text("axis title");
-    // let l = ""
-    // if (type == 'costIndex') {
-    //     l = 'Cost Index Cheapest to most Expensive';
-    // }
-    // else if (type == 'totalJobCount') {
-    //     l = 'Total Jobs Available Lowest to Highest';
-    // }
-    // else if (type == 'uePercSept2020Percentile') {
-    //     l = 'Unemployment Lowest to Highest';
-    // }
-    // else if (type == 'laborForceSept2020Percentile') {
-    //     l = 'Total labor force Lowest to Highest';
-    // }
-    // else if (type == 'topEmployerJobs') {
-    //     l = 'Top Employer available jobs Lowest to Highest';
-    // }
-    // key.append("text")
-    //     .attr("transform",
-    //         "translate(150 ,75)")
-    //     .style("text-anchor", "middle")
-    //     .style("font-size", 12)
-    //     .attr("id", "label2");
-    // document.getElementById('label2').innerHTML = l;
-
     var path = d3.geoPath();
     var toolTip = d3.select("body")
         .append("div")
         .attr("class", "tooltip-donut")
         .style("opacity", 0);
+    var clickId = '99';
     d3.json("https://d3js.org/us-10m.v1.json", function (error, us) {
         if (error) throw error;
 
@@ -220,6 +117,9 @@ function drawFirstMap(type) {
             .on('mouseout', function (d, i) {
 
                 d3.select(this).style("opacity", function (d) {
+                    if (d.id == clickId) {
+                        return 1;
+                    }
                     for (var i in emp_data) {
                         if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                             return parseFloat(emp_data[i].costIndexPercentile);
@@ -239,18 +139,49 @@ function drawFirstMap(type) {
                     }
                 })
 
-                //$('#top-emp').html("—");
-               // $('#median-sal').html("—<br>—<br>—<br>—<br>—");
-				//$('#sim-state1').html("—");
-				//$('#sim-state2').html("—");
-				//$('#sim-state3').html("—");
-                let value = 0;
-                d3.select(this).style('fill', '#de0404');
+                if (d.id == clickId) {
+
+                    d3.select(this).style('fill', 'orange');
+                }
+                else {
+                    d3.select(this).style('fill', '#de0404');
+
+                }
                 toolTip.transition()
                     .duration('50')
                     .style("opacity", 0);
             })
             .on('click', function (d, i) {
+                clickId = d.id;
+                var self = this;
+                d3.selectAll('path').style('fill', function (x) {
+                    if (!x) {
+                        return;
+                    }
+                    return '#de0404'
+                }).style("opacity", function (x) {
+                    if (!x || x.id == clickId) {
+                        return 1;
+                    }
+                    for (var i in emp_data) {
+                        if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].costIndexPercentile);
+                        }
+                        else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].totalJobCountPercentile);
+                        }
+                        else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].uePercSept2020Percentile);
+                        }
+                        else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].laborForceSept2020Percentile);
+                        }
+                        else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].topEmployerJobsPercentile);
+                        }
+                    }
+                    d3.select(self).style('fill', 'orange');
+                });
                 for (var i in emp_data) {
 
 
@@ -359,15 +290,92 @@ function fillCompareChart(stateId) {
         }).ticks(10));
 }
 
-function fillRankings(type) {
+function fillLegend() {
+    var key = d3.select("#legend1")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", 50);
+    var legend = key.append("defs")
+        .append("svg:linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("y1", "100%")
+        .attr("x2", "100%")
+        .attr("y2", "100%")
+    legend.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", 0);
 
+    legend.append("stop")
+        .attr("offset", "10%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .10);
+
+    legend.append("stop")
+        .attr("offset", "20%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .2);
+
+    legend.append("stop")
+        .attr("offset", "40%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .3);
+    legend.append("stop")
+        .attr("offset", "50%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .4);
+    legend.append("stop")
+        .attr("offset", "60%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .5);
+    legend.append("stop")
+        .attr("offset", "70%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .6);
+    legend.append("stop")
+        .attr("offset", "80%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .7);
+    legend.append("stop")
+        .attr("offset", "90%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .8);
+    legend.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#de0404")
+        .attr("stop-opacity", .9);
+    key.append("rect")
+        .attr("width", 300)
+        .attr("height", 50 - 30)
+        .style("fill", "url(#gradient)")
+        .attr("transform", "translate(110,10)");
+
+    var y = d3.scaleLinear()
+        .range([300, 0])
+        .domain([100, 1]);
+
+    var yAxis = d3.axisBottom()
+        .scale(y)
+        .ticks(5);
+
+    key.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(110,30)")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("axis title");
 }
 
 function drawDual(_id){
     // set the dimensions and margins of the graph
 var margin = {top: 30, right: 40, bottom: 30, left: 80},
 width = 460 - margin.left - margin.right,
-height = 207 - margin.top - margin.bottom;
+height = 257 - margin.top - margin.bottom;
 
 // parse the date / time
 var parseTime = d3.timeParse("%d-%b-%y");
@@ -546,7 +554,7 @@ function drawBarChart(_id) {
     // set the dimensions and margins of the graph
     var margin = { top: 20, right: 20, bottom: 30, left: 110 },
         width = 450 - margin.left - margin.right,
-        height = 150 - margin.top - margin.bottom;
+        height = 207 - margin.top - margin.bottom;
 
     // set the ranges
     var y = d3.scaleBand()
@@ -692,6 +700,7 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
     drawFirstMap('uePercSept2020Percentile');
     drawBarChart(18);
     drawDual(18);
+    fillLegend();
 });
 $('input[type=radio][name=costType]').change(function () {
     fillRankings(this.value);
