@@ -124,7 +124,12 @@ opacity: 0.7; }
 
 .bar:hover {
     fill: orange !important;
-    opacity: 1;
+    opacity: 1 !important;
+}
+
+.bar-selected {
+    fill: orange !important;
+    opacity: 0.7 !important;    
 }
 
 input[type=checkbox], input[type=radio] {
@@ -170,4 +175,7 @@ input[type=checkbox], input[type=radio] {
   .radio-text {
       font-size: 13px !important;
   }
- 
+
+  .disabled {
+      cursor: not-allowed !important;
+  }

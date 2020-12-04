@@ -1,5 +1,7 @@
 let emp_data = [];
 
+var global_type = ""
+
 var key = d3.select("#legend1")
     .append("svg")
     .attr("width", width)
@@ -7,6 +9,7 @@ var key = d3.select("#legend1")
 var width = 520,
     height = 340;
 function drawFirstMap(type) {
+    global_type = type
     $("#map-target").empty();
 
     var projection = d3.geoAlbers()
@@ -146,12 +149,15 @@ function drawFirstMap(type) {
             .style("opacity", function (d) {
                 for (var i in emp_data) {
                     if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Cost Index Percentile");
                         return parseFloat(emp_data[i].costIndexPercentile);
                     }
                     else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Total Job Count Percentile");
                         return parseFloat(emp_data[i].totalJobCountPercentile);
                     }
                     else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Unemployment Percentile");
                         return parseFloat(emp_data[i].uePercSept2020Percentile);
                     }
                     else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
@@ -159,6 +165,22 @@ function drawFirstMap(type) {
                     }
                     else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         return parseFloat(emp_data[i].topEmployerJobsPercentile);
+                    }
+                    else if (type == 'utilitiesCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Utilities Cost Percentile");
+                        return parseFloat(emp_data[i].utilitiesCostPercentile);
+                    }
+                    else if (type == 'groceryCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Grocery Cost Percentile");
+                        return parseFloat(emp_data[i].groceryCostPercentile);
+                    }
+                    else if (type == 'transportationCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Transportation Cost Percentile");
+                        return parseFloat(emp_data[i].transportationCostPercentile);
+                    }
+                    else if (type == 'miscCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution — Misc. Cost Percentile");
+                        return parseFloat(emp_data[i].miscCostPercentile);
                     }
                 }
             }).on('mouseover', function (d, i) {
@@ -168,8 +190,14 @@ function drawFirstMap(type) {
                 d3.select(this).style('opacity', 1);
                 let value = ""
                 for (var i in emp_data) {
-                    
 
+
+                    if (parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#top-emp').html(emp_data[i].topEmployer);
+                        $('#median-sal').html("$" + emp_data[i].MedianMaxSalary);
+                        $('#job-cnt').html(parseInt(emp_data[i].totalJobCount));
+                        $('#sim-state').html(emp_data[i].Top1 + ", " + emp_data[i].Top2 + ", " + emp_data[i].Top3);
+                    }                  
 
                     if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].costIndexPercentile);
@@ -194,7 +222,14 @@ function drawFirstMap(type) {
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
-					
+                    else if (type == 'utilitiesCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].utilitiesCostPercentile);
+                        toolTip.html(emp_data[i].state + '<br> Utilities Cost Rate: ' + emp_data[i].utilitiesCost +
+                            '</br> Utilities Cost Rate Percentile: ' + parseFloat(emp_data[i].utilitiesCostPercentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
+
 
                     // else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                     //     value = parseFloat(emp_data[i].laborForceSept2020Percentile);
@@ -213,6 +248,7 @@ function drawFirstMap(type) {
                     // }
                 
                 }
+                fillCompareChart(d.id)
                 toolTip.transition()
                     .duration(50)
                     .style("opacity", 1);
@@ -236,14 +272,25 @@ function drawFirstMap(type) {
                         else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                             return parseFloat(emp_data[i].topEmployerJobsPercentile);
                         }
+                        else if (type == 'utilitiesCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].utilitiesCostPercentile);
+                        }
+                        else if (type == 'groceryCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].groceryCostPercentile);
+                        }
+                        else if (type == 'transportationCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].transportationCostPercentile);
+                        }
+                        else if (type == 'miscCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].miscCostPercentile);
+                        }
                     }
                 })
 
-                //$('#top-emp').html("—");
-               // $('#median-sal').html("—<br>—<br>—<br>—<br>—");
-				//$('#sim-state1').html("—");
-				//$('#sim-state2').html("—");
-				//$('#sim-state3').html("—");
+                $('#top-emp').html("—");
+                $('#median-sal').html("—");
+                $('#job-cnt').html("—");
+                $('#sim-state').html("—");
                 let value = 0;
                 d3.select(this).style('fill', '#de0404');
                 toolTip.transition()
@@ -251,52 +298,12 @@ function drawFirstMap(type) {
                     .style("opacity", 0);
             })
             .on('click', function (d, i) {
-                for (var i in emp_data) {
-
-
-
-                    if (parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#top-emp').html(emp_data[i].topEmployer);
-                        $('#median-sal').html("Salary Range: <br>$" + emp_data[i].MedianMinSalary + " - $" + emp_data[i].MedianMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].totalJobCount) + "<br>Unemployment: " + emp_data[i].uePercSept2020 + "%" + "<br>Cost Index: " + emp_data[i].costIndex);
-                        $('#sim-state1').html(emp_data[i].Top1);
-                        $('#sim-state2').html(emp_data[i].Top2);
-                        $('#sim-state3').html(emp_data[i].Top3);
-                    }
-
-
-
-                    if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        value = parseFloat(emp_data[i].costIndexPercentile);
-                        toolTip.html(emp_data[i].state + '<br> Cost Rank: ' + emp_data[i].costRank +
-                            '</br>Cost Index percentile: ' + parseFloat(emp_data[i].costIndexPercentile * 100).toFixed(2))
-                            .style("left", (d3.event.pageX + 20) + "px")
-                            .style("top", (d3.event.pageY - 30) + "px");
-                    }
-
-                    else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        value = parseFloat(emp_data[i].totalJobCountPercentile);
-                        toolTip.html(emp_data[i].state + '<br> Total job count: ' + emp_data[i].totalJobCount +
-                            '</br>Total Job Count Percentile:' + parseFloat(emp_data[i].totalJobCountPercentile * 100).toFixed(2))
-                            .style("left", (d3.event.pageX + 20) + "px")
-                            .style("top", (d3.event.pageY - 30) + "px");
-                    }
-
-                    else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].ueSept2020 +
-                            '</br> Unemployemnt Rate Percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
-                            .style("left", (d3.event.pageX + 20) + "px")
-                            .style("top", (d3.event.pageY - 30) + "px");
-                    }
-
-                }
-                fillCompareChart(d.id)
                 drawBarChart(d.id);
                 drawDual(d.id)
                 for (var i in emp_data) {
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
                         $('#bar-heading').html('Cost of Living — ' + emp_data[i].state);
-                        $('#dual-heading').html('Employment Trends — ' + emp_data[i].state);
+                        $('#dual-heading').html('Macro Economic Variables — ' + emp_data[i].state);
                     }
                 }                
             })
@@ -367,7 +374,7 @@ function drawDual(_id){
     // set the dimensions and margins of the graph
 var margin = {top: 30, right: 40, bottom: 30, left: 80},
 width = 460 - margin.left - margin.right,
-height = 207 - margin.top - margin.bottom;
+height = 239 - margin.top - margin.bottom;
 
 // parse the date / time
 var parseTime = d3.timeParse("%d-%b-%y");
@@ -426,7 +433,7 @@ for (let index = 0; index < emp_data.length; index++) {
             "bar": parseInt(emp_data[index].laborForceSept2020),
             "line1": parseFloat(emp_data[index].uePercSept2020)
         })
-        console.log(data)
+        //console.log(data)
     }    
 }
 
@@ -519,7 +526,7 @@ function drawBarChart(_id) {
 
     for (let index = 0; index < emp_data.length; index++) {
         if (emp_data[index].id == _id) {
-            data.push({ "key": "Cost Index", "value": emp_data[index].costIndex })
+            //data.push({ "key": "Cost Index", "value": emp_data[index].costIndex })
             data.push({ "key": "Misc. Cost", "value": emp_data[index].miscCost })
             data.push({ "key": "Transpotation Cost", "value": emp_data[index].transportationCost })
             data.push({ "key": "Grocery Cost", "value": emp_data[index].groceryCost })
@@ -557,7 +564,7 @@ function drawBarChart(_id) {
     });
 
     // Scale the range of the data in the domains
-    x.domain([0, 160])
+    x.domain([0, d3.max(data, function (d) { return d.value; })])
     y.domain(data.map(function (d) { return d.key; }));
     //y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
@@ -569,7 +576,40 @@ function drawBarChart(_id) {
         //.attr("x", function(d) { return x(d.value); })
         .attr("width", function (d) { return x(d.value); })
         .attr("y", function (d) { return y(d.key); })
-        .attr("height", y.bandwidth());
+        .attr("height", y.bandwidth())
+        .style("fill", function (d) { 
+            if (global_type == "utilitiesCostPercentile" && d.key == "Utilities Cost"){
+                return "orange"
+            }
+            else if (global_type == "groceryCostPercentile" && d.key == "Grocery Cost"){
+                return "orange"
+            }
+            else if (global_type == "transportationCostPercentile" && d.key == "Transpotation Cost"){
+                return "orange"
+            }
+            else if (global_type == "miscCostPercentile" && d.key == "Misc. Cost"){
+                return "orange"
+            }
+         })
+        .on('click', function (d, i) {
+            d3.selectAll("rect").style('fill', '#de0404');
+            d3.selectAll("rect").style('opacity', '0.7');
+            d3.select(this).style('fill', 'orange');
+            $("#other").prop("checked", true);
+            $("#other").prop("disabled", false);
+            if(d.key == "Utilities Cost"){
+                drawFirstMap("utilitiesCostPercentile")
+            }
+            else if(d.key == "Grocery Cost"){
+                drawFirstMap("groceryCostPercentile")
+            }
+            else if(d.key == "Transpotation Cost"){
+                drawFirstMap("transportationCostPercentile")
+            }
+            else if(d.key == "Misc. Cost"){
+                drawFirstMap("miscCostPercentile")
+            }
+        });
 
     // add the x Axis
     svg.append("g")
@@ -620,7 +660,11 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
         let MedianMinSalary = data[counter].MedianMinSalary
 		let Top1 = data[counter].Top1
 		let Top2 = data[counter].Top2
-		let Top3 = data[counter].Top3
+        let Top3 = data[counter].Top3
+        let utilitiesCostPercentile = data[counter].utilitiesCostPercentile
+        let groceryCostPercentile = data[counter].groceryCostPercentile
+        let transportationCostPercentile = data[counter].transportationCostPercentile
+        let miscCostPercentile = data[counter].miscCostPercentile
 
         emp_data.push({
             state: state,
@@ -658,15 +702,23 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
             MedianMinSalary: MedianMinSalary,
 			Top1: Top1,
 			Top2: Top2,
-			Top3: Top3
+            Top3: Top3,
+            utilitiesCostPercentile: utilitiesCostPercentile,
+            groceryCostPercentile: groceryCostPercentile,
+            transportationCostPercentile: transportationCostPercentile,
+            miscCostPercentile: miscCostPercentile
+
         });
     };
-    console.log(emp_data);
+    //console.log(emp_data);
     drawFirstMap('uePercSept2020Percentile');
     drawBarChart(18);
     drawDual(18);
 });
 $('input[type=radio][name=costType]').change(function () {
+    $("#other").prop("disabled", true);
+    d3.selectAll("rect").style('fill', '#de0404');
+    d3.selectAll("rect").style('opacity', '0.7');
     fillRankings(this.value);
     drawFirstMap(this.value);
 });
