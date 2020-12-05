@@ -8,6 +8,10 @@ var key = d3.select("#legend1")
     .attr("height", 50);
 var width = 520,
     height = 340;
+var toolTip = d3.select("body")
+    .append("div")
+    .attr("class", "tooltip-donut")
+    .style("opacity", 0);
 function drawFirstMap(type) {
     global_type = type
     $("#map-target").empty();
@@ -24,10 +28,6 @@ function drawFirstMap(type) {
         .attr("height", height);
 
     var path = d3.geoPath();
-    var toolTip = d3.select("body")
-        .append("div")
-        .attr("class", "tooltip-donut")
-        .style("opacity", 0);
     var clickId = '99';
     d3.json("https://d3js.org/us-10m.v1.json", function (error, us) {
         if (error) throw error;
@@ -561,7 +561,29 @@ function drawDual(_id) {
         .style("fill", "steelblue")
         .attr("cx", function (d) { return xLine(d.year); })
         .attr("cy", function (d) { return yLine(d.line1); })
-        .attr("r", function (d) { return 5; });
+        .attr("r", function (d) { return 5; })
+        .on('mouseover', function (d, i) {
+
+            var currentState = this;
+            d3.select(this).style('fill', 'orange');
+            d3.select(this).style('opacity', 1);
+            value = parseFloat(d.line1);
+                    toolTip.html('Uneployment Rate: %' +value)
+                        .style("left", (d3.event.pageX + 20) + "px")
+                        .style("top", (d3.event.pageY - 30) + "px");
+                
+            toolTip.transition()
+                .duration(50)
+                .style("opacity", 1);
+        })
+        .on('mouseout', function (d, i) {
+
+            d3.select(this).style('fill', 'steelblue');
+
+            toolTip.transition()
+                .duration('50')
+                .style("opacity", 0);
+        });
 
     // Add the X Axis
     svg.append("g")
