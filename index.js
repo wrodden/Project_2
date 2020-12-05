@@ -121,7 +121,27 @@ function drawFirstMap(type) {
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
-
+                    else if (type == 'groceryCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].groceryCostPercentile);
+                        toolTip.html(emp_data[i].state + '<br> Grocery Cost Rate: ' + emp_data[i].groceryCost +
+                            '</br> Grocery Cost Rate Percentile: ' + parseFloat(emp_data[i].groceryCostPercentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
+                    else if (type == 'transportationCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].transportationCostPercentile);
+                        toolTip.html(emp_data[i].state + '<br> Transportaion Cost Rate: ' + emp_data[i].transportationCost +
+                            '</br> Transportaions Cost Rate Percentile: ' + parseFloat(emp_data[i].transportationCostPercentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
+                    else if (type == 'miscCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].miscCostPercentile);
+                        toolTip.html(emp_data[i].state + '<br> Misc Cost Rate: ' + emp_data[i].miscCost +
+                            '</br> Misc Cost Rate Percentile: ' + parseFloat(emp_data[i].miscCostPercentile * 100).toFixed(2))
+                            .style("left", (d3.event.pageX + 20) + "px")
+                            .style("top", (d3.event.pageY - 30) + "px");
+                    }
 
                     // else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                     //     value = parseFloat(emp_data[i].laborForceSept2020Percentile);
