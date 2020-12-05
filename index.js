@@ -662,7 +662,7 @@ function drawBarChart(_id) {
             else if (global_type == "groceryCostPercentile" && d.key == "Grocery Cost"){
                 return "orange"
             }
-            else if (global_type == "transportationCostPercentile" && d.key == "Transpotation Cost"){
+            else if (global_type == "transportationCostPercentile" && d.key == "Transportation Cost"){
                 return "orange"
             }
             else if (global_type == "miscCostPercentile" && d.key == "Misc. Cost"){
@@ -681,7 +681,7 @@ function drawBarChart(_id) {
             else if(d.key == "Grocery Cost"){
                 drawFirstMap("groceryCostPercentile")
             }
-            else if(d.key == "Transpotation Cost"){
+            else if(d.key == "Transportation Cost"){
                 drawFirstMap("transportationCostPercentile")
             }
             else if(d.key == "Misc. Cost"){
