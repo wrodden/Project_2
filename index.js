@@ -371,167 +371,179 @@ function fillLegend() {
         .text("axis title");
 }
 
-function drawDual(_id){
+function drawDual(_id) {
     // set the dimensions and margins of the graph
-var margin = {top: 30, right: 40, bottom: 30, left: 80},
-width = 460 - margin.left - margin.right,
-height = 257 - margin.top - margin.bottom;
+    var margin = { top: 30, right: 40, bottom: 30, left: 80 },
+        width = 460 - margin.left - margin.right,
+        height = 257 - margin.top - margin.bottom;
 
-// parse the date / time
-var parseTime = d3.timeParse("%d-%b-%y");
+    // parse the date / time
+    var parseTime = d3.timeParse("%d-%b-%y");
 
-// set the ranges
-var xBar = d3.scaleBand().range([0, width]).paddingInner(0.5).paddingOuter(0.25);
-var xLine = d3.scalePoint().range([0, width]).padding(0.5);
-var yBar = d3.scaleLinear().range([height, 0]);
-var yLine = d3.scaleLinear().range([height, 0]);
+    // set the ranges
+    var xBar = d3.scaleBand().range([0, width]).paddingInner(0.5).paddingOuter(0.25);
+    var xLine = d3.scalePoint().range([0, width]).padding(0.5);
+    var yBar = d3.scaleLinear().range([height, 0]);
+    var yLine = d3.scaleLinear().range([height, 0]);
 
-// define the 1st line
-var valueline = d3.line()
-.x(function(d) { return xLine(d.year); })
-.y(function(d) { return yLine(d.line1); });
+    // define the 1st line
+    var valueline = d3.line()
+        .x(function (d) { return xLine(d.year); })
+        .y(function (d) { return yLine(d.line1); });
 
-// // define the 2nd line
-// var valueline2 = d3.line()
-// .x(function(d) { return xLine(d.year); })
-// .y(function(d) { return yLine(d.line2); });
+    // // define the 2nd line
+    // var valueline2 = d3.line()
+    // .x(function(d) { return xLine(d.year); })
+    // .y(function(d) { return yLine(d.line2); });
 
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-$("#dual").empty();
-var svg = d3.select("#dual").append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")");
+    // append the svg obgect to the body of the page
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    $("#dual").empty();
+    var svg = d3.select("#dual").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
-// Get the data
-// format the data
+    // Get the data
+    // format the data
 
-data = []
-_id = parseInt(_id, 10)
-for (let index = 0; index < emp_data.length; index++) {
-    if(emp_data[index].id == _id){
-        data.push({
-            "year": "Sept 2019",
-            "bar": parseInt(emp_data[index].uePerc2019),
+    data = []
+    specialLine = null;
+    _id = parseInt(_id, 10)
+    for (let index = 0; index < emp_data.length; index++) {
+        line = []; 
+        let bold = emp_data[index].id == _id;
+        line.push({
+            "year": "2008",
+            "line1": parseFloat(emp_data[index].uePerc2008)
+        })
+        line.push({
+            "year": "2009",
+            "line1": parseFloat(emp_data[index].uePerc2009)
+        })
+        line.push({
+            "year": "2010",
+            "line1": parseFloat(emp_data[index].uePerc2010),
+            "state": emp_data[index].state
+        })
+        line.push({
+            "year": "2011",
+            "line1": parseFloat(emp_data[index].uePerc2011)
+        })
+        line.push({
+            "year": "2012",
+            "line1": parseFloat(emp_data[index].uePerc2012)
+        })
+        line.push({
+            "year": "2013",
+            "line1": parseFloat(emp_data[index].uePerc2013)
+        })
+        line.push({
+            "year": "2014",
+            "line1": parseFloat(emp_data[index].uePerc2014)
+        })
+        line.push({
+            "year": "2015",
+            "line1": parseFloat(emp_data[index].uePerc2015)
+        })
+        line.push({
+            "year": "2016",
+            "line1": parseFloat(emp_data[index].uePerc2016)
+        })
+        line.push({
+            "year": "2017",
+            "line1": parseFloat(emp_data[index].uePerc2017)
+        })
+        line.push({
+            "year": "2018",
+            "line1": parseFloat(emp_data[index].uePerc2018)
+        })
+        line.push({
+            "year": "2019",
             "line1": parseFloat(emp_data[index].uePerc2019)
         })
-        data.push({
-            "year": "July 2020",
-            "bar": parseInt(emp_data[index].uePercJuly2020),
-            "line1": parseFloat(emp_data[index].uePercJuly2020)
-        })
-        data.push({
-            "year": "Aug 2020",
-            "bar": parseInt(emp_data[index].uePercAug2020),
-            "line1": parseFloat(emp_data[index].uePercAug2020),
-			"state" :emp_data[index].state
-        })
-        data.push({
-            "year": "Sept 2020",
-            "bar": parseInt(emp_data[index].uePerc2020),
+        line.push({
+            "year": "2020",
             "line1": parseFloat(emp_data[index].uePerc2020)
         })
-        console.log(data)
-    }    
-}
+        if (!bold) {
+            data.push(line);
+        }
+        else {
+            specialLine = line;
+        }
+    }
 
-// data = [{year: "last year", bar: 106, line1: 1.18},{year: 4, bar: 146, line1: 5.18}]
+    // data = [{year: "last year", bar: 106, line1: 1.18},{year: 4, bar: 146, line1: 5.18}]
 
-// Scale the range of the data
-xBar.domain(data.map(function(d) { return d.year; }));
-xLine.domain(data.map(function(d) { return d.year; }));
-yBar.domain([d3.min(data, function(d) { return d.bar; }), d3.max(data, function(d) { return d.bar; })]).nice();
-yLine.domain([d3.min(data, function(d) {return Math.max(d.line1); }), d3.max(data, function(d) {return Math.max(d.line1); })]).nice();
+    // Scale the range of the data
+    xLine.domain([2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018, 2019,2020]);
+    yLine.domain([0,15]).nice();
 
-// Add the valueline path.
-svg.append("path")
-  .data([data])
-  .attr("class", "line")
-  .style("stroke", "steelblue")
-  .attr("d", valueline);
+    // Add the valueline path.
+    for (var i in data) {
+        svg.append("path")
+            .data([data[i]])
+            .attr("class", "line")
+            .style("stroke", "steelblue")
+            .style("opacity",".1")
+            .attr("d", valueline);
+        var points1 = svg.selectAll("circle.point1")
+            .data(data[i])
 
-// Add the valueline2 path.
-// svg.append("path")
-//   .data([data])
-//   .attr("class", "line")
-//   .style("stroke", "crimson")
-//   .attr("d", valueline2);
+    }
 
-//var rect = svg.selectAll("rect")
-//  .data(data)
-      
-//rect.enter().append("rect")
- // .merge(rect)
-//  .attr("class", "bar")
-//  .style("stroke", "none")
-//  .style("fill", "#de0404")
-//  .style("opacity", "0.7")
-//  .attr("x", function(d){ return xBar(d.year); })
-//  .attr("width", function(d){ return xBar.bandwidth(); })
- // .attr("y", function(d){ return yBar(d.bar); })
-//  .attr("height", function(d){ return height - yBar(d.bar); });
+    svg.append("path")
+        .data([specialLine])
+        .attr("class", "line")
+        .style("stroke", "steelblue")
+        .style("opacity", "1")
+        .attr("d", valueline);
+    var points1 = svg.selectAll("circle.point1")
+        .data(specialLine)
 
+    points1.enter().append("circle")
+        .merge(points1)
+        .attr("class", "point1")
+        .style("stroke", "steelblue")
+        .style("fill", "steelblue")
+        .attr("cx", function (d) { return xLine(d.year); })
+        .attr("cy", function (d) { return yLine(d.line1); })
+        .attr("r", function (d) { return 5; });
 
-var points2 = svg.selectAll("circle.point2")
-  .data(data)
-      
-// points2.enter().append("circle")
-//   .merge(points2)
-//   .attr("class", "point2")
-//   .style("stroke", "crimson")
-//   .style("stroke-width", 3)
-//       .style("fill", "none")
-//   .attr("cx", function(d){ return xLine(d.year); })
-//   .attr("cy", function(d){ return yLine(d.line1); })
-//   .attr("r", function(d){ return 10; });
+    // Add the X Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(xLine));
 
-var points1 = svg.selectAll("circle.point1")
-  .data(data)
-      
-points1.enter().append("circle")
-  .merge(points1)
-  .attr("class", "point1")
-  .style("stroke", "steelblue")
-      .style("fill", "steelblue")
-  .attr("cx", function(d){ return xLine(d.year); })
-  .attr("cy", function(d){ return yLine(d.line1); })
-  .attr("r", function(d){ return 5; });
+    // Add the Y0 Axis
+    svg.append("g")
+        .attr("class", "axisSteelBlue")
+        .call(d3.axisLeft(yLine));
 
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Percent Unemployed");
 
-// Add the X Axis
-svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(xLine));
+    //svg.append("text")             
+    //      .attr("transform",
+    //            "translate(" + (width/2) + " ," + 
+    //                           (height + margin.top + 20) + ")")
+    //      .style("text-anchor", "middle")
+    //      .text(data.state);
 
-// Add the Y0 Axis
-svg.append("g")
-  .attr("class", "axisSteelBlue")
-  .call(d3.axisLeft(yBar));
-  
-svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x",0 - (height / 2))
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Percent Unemployed"); 
-	  
-//svg.append("text")             
-//      .attr("transform",
-//            "translate(" + (width/2) + " ," + 
-//                           (height + margin.top + 20) + ")")
-//      .style("text-anchor", "middle")
-//      .text(data.state);
-
-// Add the Y1 Axis
-//svg.append("g")
-//  .attr("class", "axisSteelBlue")
-//  .attr("transform", "translate( " + width + ", 0 )")
-//  .call(d3.axisRight(yLine));
+    // Add the Y1 Axis
+    //svg.append("g")
+    //  .attr("class", "axisSteelBlue")
+    //  .attr("transform", "translate( " + width + ", 0 )")
+    //  .call(d3.axisRight(yLine));
 
 
 }
