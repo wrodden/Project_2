@@ -14,8 +14,8 @@
             <div class="row">
                 <div class="card" style="width: 8.5rem;">
                     <div class="card-body">
-                        <p class="card-text">Job Count</p>
-                        <p id="job-cnt" class="card-text details">—</p>
+                        <p class="card-text">State Data</p>
+                        <p id="median-sal" class="card-text details">Salary Range:<br>$52,000 - $92,000<br>Job Count: 137<br>Unemployment: 6.2%<br>Cost Index: 90</p>
                     </div>
                 </div>
                 <div class="card" style="width: 8.5rem;">
@@ -27,13 +27,15 @@
                 <div class="card" style="width: 8.5rem;">
                     <div class="card-body">
                         <p class="card-text">Top Employer</p>
-                        <p id="top-emp" class="card-text details">—</p>
+                        <p id="top-emp" class="card-text details">Lilly UK<br>Salary Range:<br>$63,500 - $124,000<br>Job Count: 13<br>Rating: 3.5</p>
                     </div>
                 </div>
                 <div class="card" style="width: 8.5rem;">
                     <div class="card-body">
                         <p class="card-text">Similar States</p>
-                        <p id="sim-state" class="card-text details">—</p>
+                        <p id="sim-state1" class="card-text details">Virginia</p>
+                        <p id="sim-state2" class="card-text details">Ohio</p>
+                        <p id="sim-state3" class="card-text details">Georgia</p>
                     </div>
                 </div>
             </div>
@@ -56,18 +58,19 @@
         <div class="column">
             <div class="card" style="width: 30rem;">
                 <div class="card-body">
-                    <p id="bar-heading" class="text-center">Cost Analysis — Indiana</p>
+                    <p id="bar-heading" class="text-center">Cost of Living Indices <br> Indiana</p>
                     <div id="graphic"></div>
                 </div>
-            </div>   
+            </div>
             <div class="card" style="width: 30rem;">
                 <div class="card-body">
-                    <p id="dual-heading" class="text-center">Employment Trend — Indiana</p>
+                    <p id="dual-heading" class="text-center">Unemployment Trends (Sept 2019 to Sept 2020) <br>Indiana</p>
                     <div id="dual"></div>
                 </div>
-            </div>     
+            </div>
         </div>
 
+         <a title="Documentation Page" style="float:right" href="/Project_2/Documentation.html"><i class="fas fa-info-circle"></i></a>
     </div>
 
 </body>
@@ -79,9 +82,10 @@
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="index.js"></script>
