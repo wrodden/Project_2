@@ -49,16 +49,16 @@ function drawFirstMap(type) {
             .style("opacity", function (d) {
                 for (var i in emp_data) {
                     if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Cost Index Percentile");
+                        $('#dist').html("Distribution - Cost Index Percentile");
                         return parseFloat(emp_data[i].costIndexPercentile);
                     }
                     else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Total Job Count Percentile");
+                        $('#dist').html("Distribution - Total Job Count Percentile");
                         return parseFloat(emp_data[i].totalJobCountPercentile);
                     }
-                    else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Unemployment Percentile");
-                        return parseFloat(emp_data[i].uePercSept2020Percentile);
+                    else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        $('#dist').html("Distribution - Unemployment Percentile");
+                        return parseFloat(emp_data[i].uePerc2020Percentile);
                     }
                     else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         return parseFloat(emp_data[i].laborForceSept2020Percentile);
@@ -67,19 +67,19 @@ function drawFirstMap(type) {
                         return parseFloat(emp_data[i].topEmployerJobsPercentile);
                     }
                     else if (type == 'utilitiesCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Utilities Cost Percentile");
+                        $('#dist').html("Distribution - Utilities Cost Percentile");
                         return parseFloat(emp_data[i].utilitiesCostPercentile);
                     }
                     else if (type == 'groceryCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Grocery Cost Percentile");
+                        $('#dist').html("Distribution - Grocery Cost Percentile");
                         return parseFloat(emp_data[i].groceryCostPercentile);
                     }
                     else if (type == 'transportationCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Transportation Cost Percentile");
+                        $('#dist').html("Distribution - Transportation Cost Percentile");
                         return parseFloat(emp_data[i].transportationCostPercentile);
                     }
                     else if (type == 'miscCostPercentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#dist').html("Distribution — Misc. Cost Percentile");
+                        $('#dist').html("Distribution - Misc. Cost Percentile");
                         return parseFloat(emp_data[i].miscCostPercentile);
                     }
                 }
@@ -90,14 +90,6 @@ function drawFirstMap(type) {
                 d3.select(this).style('opacity', 1);
                 let value = ""
                 for (var i in emp_data) {
-
-
-                    if (parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#top-emp').html(emp_data[i].topEmployer);
-                        $('#median-sal').html("$" + emp_data[i].MedianMaxSalary);
-                        $('#job-cnt').html(parseInt(emp_data[i].totalJobCount));
-                        $('#sim-state').html(emp_data[i].Top1 + ", " + emp_data[i].Top2 + ", " + emp_data[i].Top3);
-                    }                  
 
                     if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].costIndexPercentile);
@@ -148,7 +140,6 @@ function drawFirstMap(type) {
                     // }
                 
                 }
-                fillCompareChart(d.id)
                 toolTip.transition()
                     .duration(50)
                     .style("opacity", 1);
@@ -230,23 +221,30 @@ function drawFirstMap(type) {
                         else if (type == 'topEmployerJobs' && parseInt(emp_data[i].id) == parseInt(x.id)) {
                             return parseFloat(emp_data[i].topEmployerJobsPercentile);
                         }
+                        else if (type == 'utilitiesCostPercentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].utilitiesCostPercentile);
+                        }
+                        else if (type == 'groceryCostPercentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].groceryCostPercentile);
+                        }
+                        else if (type == 'transportationCostPercentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].transportationCostPercentile);
+                        }
+                        else if (type == 'miscCostPercentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].miscCostPercentile);
+                        }
                     }
                     d3.select(self).style('fill', 'orange');
                 });
                 for (var i in emp_data) {
 
-
-
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        $('#top-emp').html(emp_data[i].topEmployer+"<br>Salary Range: <br>" + emp_data[i].TEMinSalary + " - " + emp_data[i].TEMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].topEmployerJobs) + "<br>Rating: " + emp_data[i].TERating);
+                        $('#top-emp').html(emp_data[i].topEmployer + "<br>Salary Range: <br>" + emp_data[i].TEMinSalary + " - " + emp_data[i].TEMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].topEmployerJobs) + "<br>Rating: " + emp_data[i].TERating);
                         $('#median-sal').html("Salary Range: <br>" + emp_data[i].MedianMinSalary + " - " + emp_data[i].MedianMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].totalJobCount) + "<br>Unemployment: " + emp_data[i].uePerc2020 + "%" + "<br>Cost Index: " + emp_data[i].costIndex);
                         $('#sim-state1').html(emp_data[i].Top1);
                         $('#sim-state2').html(emp_data[i].Top2);
                         $('#sim-state3').html(emp_data[i].Top3);
                     }
-
-
-
                     if (type == 'costIndex' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].costIndexPercentile);
                         toolTip.html(emp_data[i].state + '<br> Cost Rank: ' + emp_data[i].costRank +
@@ -265,7 +263,7 @@ function drawFirstMap(type) {
 
                     else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         value = parseFloat(emp_data[i].uePerc2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePerc2020 + "%"+
+                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePerc2020 + "%" +
                             '</br> Unemployment Rate Percentile: ' + parseFloat(emp_data[i].uePerc2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
@@ -278,7 +276,7 @@ function drawFirstMap(type) {
                 for (var i in emp_data) {
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
                         $('#bar-heading').html('Cost of Living Indices <br>' + emp_data[i].state);
-                        $('#dual-heading').html('Unemployment Trends (Sept 2019 to Sept 2020) <br> ' + emp_data[i].state);
+                        $('#dual-heading').html('Unemployment Trends (2008 to 2020) <br> ' + emp_data[i].state);
                     }
                 }                
             })
@@ -768,10 +766,6 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
 		let TEMinSalary = data[counter].TESalaryRangeMinimum
 		let TERating = data[counter].CompanyRating2
 		let StateEmployerRating = data[counter].StateEmployerRating
-
-		
-
-        let Top3 = data[counter].Top3
         let utilitiesCostPercentile = data[counter].utilitiesCostPercentile
         let groceryCostPercentile = data[counter].groceryCostPercentile
         let transportationCostPercentile = data[counter].transportationCostPercentile
@@ -848,7 +842,7 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
         });
     };
     //console.log(emp_data);
-    drawFirstMap('uePercSept2020Percentile');
+    drawFirstMap('uePerc2020Percentile');
     drawBarChart(18);
     drawDual(18);
     fillLegend();
@@ -857,6 +851,5 @@ $('input[type=radio][name=costType]').change(function () {
     $("#other").prop("disabled", true);
     d3.selectAll("rect").style('fill', '#de0404');
     d3.selectAll("rect").style('opacity', '0.7');
-    fillRankings(this.value);
     drawFirstMap(this.value);
 });
