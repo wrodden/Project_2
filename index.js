@@ -48,8 +48,8 @@ function drawFirstMap(type) {
                     else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         return parseFloat(emp_data[i].totalJobCountPercentile);
                     }
-                    else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        return parseFloat(emp_data[i].uePercSept2020Percentile);
+                    else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        return parseFloat(emp_data[i].uePerc2020Percentile);
                     }
                     else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                         return parseFloat(emp_data[i].laborForceSept2020Percentile);
@@ -84,10 +84,10 @@ function drawFirstMap(type) {
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
 
-                    else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePercSept2020 + "%"+
-                            '</br> Unemployment Rate Percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
+                    else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].uePerc2020Percentile);
+                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePerc2020 + "%"+
+                            '</br> Unemployment Rate Percentile: ' + parseFloat(emp_data[i].uePerc2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
@@ -127,8 +127,8 @@ function drawFirstMap(type) {
                         else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                             return parseFloat(emp_data[i].totalJobCountPercentile);
                         }
-                        else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                            return parseFloat(emp_data[i].uePercSept2020Percentile);
+                        else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                            return parseFloat(emp_data[i].uePerc2020Percentile);
                         }
                         else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
                             return parseFloat(emp_data[i].laborForceSept2020Percentile);
@@ -170,8 +170,8 @@ function drawFirstMap(type) {
                         else if (type == 'totalJobCount' && parseInt(emp_data[i].id) == parseInt(x.id)) {
                             return parseFloat(emp_data[i].totalJobCountPercentile);
                         }
-                        else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
-                            return parseFloat(emp_data[i].uePercSept2020Percentile);
+                        else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
+                            return parseFloat(emp_data[i].uePerc2020Percentile);
                         }
                         else if (type == 'laborForceSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(x.id)) {
                             return parseFloat(emp_data[i].laborForceSept2020Percentile);
@@ -188,7 +188,7 @@ function drawFirstMap(type) {
 
                     if (parseInt(emp_data[i].id) == parseInt(d.id)) {
                         $('#top-emp').html(emp_data[i].topEmployer+"<br>Salary Range: <br>" + emp_data[i].TEMinSalary + " - " + emp_data[i].TEMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].topEmployerJobs) + "<br>Rating: " + emp_data[i].TERating);
-                        $('#median-sal').html("Salary Range: <br>" + emp_data[i].MedianMinSalary + " - " + emp_data[i].MedianMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].totalJobCount) + "<br>Unemployment: " + emp_data[i].uePercSept2020 + "%" + "<br>Cost Index: " + emp_data[i].costIndex);
+                        $('#median-sal').html("Salary Range: <br>" + emp_data[i].MedianMinSalary + " - " + emp_data[i].MedianMaxSalary + "<br>Job Count: " + parseInt(emp_data[i].totalJobCount) + "<br>Unemployment: " + emp_data[i].uePerc2020 + "%" + "<br>Cost Index: " + emp_data[i].costIndex);
                         $('#sim-state1').html(emp_data[i].Top1);
                         $('#sim-state2').html(emp_data[i].Top2);
                         $('#sim-state3').html(emp_data[i].Top3);
@@ -212,10 +212,10 @@ function drawFirstMap(type) {
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
 
-                    else if (type == 'uePercSept2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
-                        value = parseFloat(emp_data[i].uePercSept2020Percentile);
-                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePercSept2020 + "%"+
-                            '</br> Unemployment Rate Percentile: ' + parseFloat(emp_data[i].uePercSept2020Percentile * 100).toFixed(2))
+                    else if (type == 'uePerc2020Percentile' && parseInt(emp_data[i].id) == parseInt(d.id)) {
+                        value = parseFloat(emp_data[i].uePerc2020Percentile);
+                        toolTip.html(emp_data[i].state + '<br> Unemployment Rate: ' + emp_data[i].uePerc2020 + "%"+
+                            '</br> Unemployment Rate Percentile: ' + parseFloat(emp_data[i].uePerc2020Percentile * 100).toFixed(2))
                             .style("left", (d3.event.pageX + 20) + "px")
                             .style("top", (d3.event.pageY - 30) + "px");
                     }
@@ -255,7 +255,7 @@ function fillCompareChart(stateId) {
         if (parseInt(emp_data[i].id) == parseInt(stateId)) {
             data.push({ text: 'Cost Index', value: parseFloat(emp_data[i].costIndexPercentile) * 100, column: 1 });
             data.push({ text: 'Total Job Count', value: parseFloat(emp_data[i].totalJobCountPercentile) * 100, column: 2 });
-            data.push({ text: 'Unemployment', value: parseFloat(emp_data[i].uePercSept2020Percentile) * 100, column: 3 });
+            data.push({ text: 'Unemployment', value: parseFloat(emp_data[i].uePerc2020Percentile) * 100, column: 3 });
             data.push({ text: 'Labor Force', value: parseFloat(emp_data[i].laborForceSept2020Percentile) * 100, column: 4 });
             data.push({ text: 'Top Employee Jobs', value: parseFloat(emp_data[i].topEmployerJobsPercentile) * 100, column: 5 });
         }
@@ -416,8 +416,8 @@ for (let index = 0; index < emp_data.length; index++) {
     if(emp_data[index].id == _id){
         data.push({
             "year": "Sept 2019",
-            "bar": parseInt(emp_data[index].uePercSept2019),
-            "line1": parseFloat(emp_data[index].uePercSept2019)
+            "bar": parseInt(emp_data[index].uePerc2019),
+            "line1": parseFloat(emp_data[index].uePerc2019)
         })
         data.push({
             "year": "July 2020",
@@ -432,8 +432,8 @@ for (let index = 0; index < emp_data.length; index++) {
         })
         data.push({
             "year": "Sept 2020",
-            "bar": parseInt(emp_data[index].uePercSept2020),
-            "line1": parseFloat(emp_data[index].uePercSept2020)
+            "bar": parseInt(emp_data[index].uePerc2020),
+            "line1": parseFloat(emp_data[index].uePerc2020)
         })
         console.log(data)
     }    
@@ -581,7 +581,7 @@ function drawBarChart(_id) {
     });
 
     // Scale the range of the data in the domains
-    x.domain([0, 160])
+    x.domain([0, 200])
     y.domain(data.map(function (d) { return d.key; }));
     //y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
@@ -621,14 +621,37 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
         let ueJuly2020 = data[counter].UEJuly2020;
         let ueAug2020 = data[counter].UEAug2020;
         let ueSept2020 = data[counter].UESept2020;
-        let uePercSept2019 = data[counter].UEPercSept2019;
+		let uePerc2008 = data[counter].ue2008
+		let uePerc2009 = data[counter].ue2009
+		let uePerc2010 = data[counter].ue2010
+		let uePerc2011 = data[counter].ue2011
+		let uePerc2012 = data[counter].ue2012
+		let uePerc2013 = data[counter].ue2013
+		let uePerc2014 = data[counter].ue2014
+		let uePerc2015 = data[counter].ue2015
+		let uePerc2016 = data[counter].ue2016
+		let uePerc2017 = data[counter].ue2017
+		let uePerc2018 = data[counter].ue2018
+        let uePerc2019 = data[counter].ue2019;
         let uePercJuly2020 = data[counter].UEPercJuly2020;
         let uePercAug2020 = data[counter].UEPercAug2020;
-        let uePercSept2020 = data[counter].UEPercSept2020;
-        let uePercSept2019Percentile = data[counter].UEPercSept2019Percentile;
+        let uePerc2020 = data[counter].ue2020;
+		let ue2007Percentile = data[counter].ue2007Percentile;
+		let uePerc2008Percentile = data[counter].ue2008Percentile;
+		let uePerc2009Percentile = data[counter].ue2009Percentile;
+		let uePerc2010Percentile = data[counter].ue2010Percentile;
+		let uePerc2011Percentile = data[counter].ue2011Percentile;
+		let uePerc2012Percentile = data[counter].ue2012Percentile;
+		let uePerc2013Percentile = data[counter].ue2013Percentile;
+		let uePerc2014Percentile = data[counter].ue2014Percentile;
+		let uePerc2015Percentile = data[counter].ue2015Percentile;
+		let uePerc2016Percentile = data[counter].ue2016Percentile;
+		let uePerc2017Percentile = data[counter].ue2017Percentile;
+		let uePerc2018Percentile = data[counter].ue2018Percentile;
+        let uePerc2019Percentile = data[counter].ue2019Percentile;
         let uePercJuly2020Percentile = data[counter].UEPercJuly2020Percentile;
         let uePercAug2020Percentile = data[counter].UEPercAug2020Percentile;
-        let uePercSept2020Percentile = data[counter].UEPercSept2020Percentile;
+        let uePerc2020Percentile = data[counter].ue2020Percentile;
         let topEmployer = data[counter].TopEmployer;
         let topEmployerJobs = data[counter].TopEmployerJobs;
         let totalJobCount = data[counter].TotalJobCount;
@@ -670,14 +693,36 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
             ueJuly2020: ueJuly2020,
             ueAug2020: ueAug2020,
             ueSept2020: ueSept2020,
-            uePercSept2019: uePercSept2019,
+			uePerc2008: uePerc2008,
+			uePerc2009: uePerc2009,
+			uePerc2010: uePerc2010,
+			uePerc2011: uePerc2011,
+			uePerc2012: uePerc2012,
+			uePerc2013: uePerc2013,
+			uePerc2014: uePerc2014,
+			uePerc2015: uePerc2015,
+			uePerc2016: uePerc2016,
+			uePerc2017: uePerc2017,
+			uePerc2018: uePerc2018,
+            uePerc2019: uePerc2019,
             uePercJuly2020: uePercJuly2020,
             uePercAug2020: uePercAug2020,
-            uePercSept2020: uePercSept2020,
-            uePercSept2019Percentile: uePercSept2019Percentile,
+            uePerc2020: uePerc2020,
+			uePerc2008Percentile : uePerc2008Percentile,
+			uePerc2009Percentile : uePerc2009Percentile,
+			uePerc2010Percentile : uePerc2010Percentile,
+			uePerc2011Percentile : uePerc2011Percentile,
+			uePerc2012Percentile : uePerc2012Percentile,
+			uePerc2013Percentile : uePerc2013Percentile,
+			uePerc2014Percentile : uePerc2014Percentile,
+			uePerc2015Percentile : uePerc2015Percentile,
+			uePerc2016Percentile : uePerc2016Percentile,
+			uePerc2017Percentile : uePerc2017Percentile,
+			uePerc2018Percentile : uePerc2018Percentile,
+            uePerc2019Percentile: uePerc2019Percentile,
             uePercJuly2020Percentile: uePercJuly2020Percentile,
             uePercAug2020Percentile: uePercAug2020Percentile,
-            uePercSept2020Percentile: uePercSept2020Percentile,
+            uePerc2020Percentile: uePerc2020Percentile,
             topEmployer: topEmployer,
             topEmployerJobs: topEmployerJobs,
             totalJobCount: totalJobCount,
@@ -697,7 +742,7 @@ d3.csv("Project 2 Employment Data.csv", function (data) {
         });
     };
     console.log(emp_data);
-    drawFirstMap('uePercSept2020Percentile');
+    drawFirstMap('uePerc2020Percentile');
     drawBarChart(18);
     drawDual(18);
     fillLegend();
