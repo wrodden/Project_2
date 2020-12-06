@@ -45,7 +45,7 @@ body {
 
 
 text {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat' !important;
 }
 
 path {
@@ -178,4 +178,10 @@ input[type=checkbox], input[type=radio] {
 
   .disabled {
       cursor: not-allowed !important;
+  }
+
+  .info-btn{
+      color: white !important;
+      font-size: 20px;
+      margin: 22px;
   }
