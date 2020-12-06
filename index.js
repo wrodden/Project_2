@@ -360,10 +360,10 @@ function fillCompareChart(stateId) {
 }
 
 function fillLegend() {
-    var key = d3.select("#legend1")
+    var key = d3.select("#legend2")
         .append("svg")
         .attr("width", width)
-        .attr("height", 50);
+        .attr("height", 52);
     var legend = key.append("defs")
         .append("svg:linearGradient")
         .attr("id", "gradient")
@@ -684,7 +684,8 @@ function drawBarChart(_id) {
     });
 
     // Scale the range of the data in the domains
-    x.domain([0, 200])
+    // x.domain([0, 200])
+    x.domain([0, d3.max(data, function (d) { return d.value; })])
     y.domain(data.map(function (d) { return d.key; }));
     //y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
@@ -710,6 +711,11 @@ function drawBarChart(_id) {
             else if (global_type == "miscCostPercentile" && d.key == "Misc. Cost"){
                 return "orange"
             }
+            else if (global_type == "To" && d.key == "Misc. Cost"){
+                return "orange"
+            }
+
+
          })
         .on('click', function (d, i) {
             d3.selectAll("rect").style('fill', '#de0404');
