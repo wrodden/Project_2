@@ -38,6 +38,7 @@ function drawFirstMap(type) {
             .fitExtent([[1, 1], [580 - 60, 400 - 60]], featureCollection)
 
         var path = d3.geoPath().projection(projection)
+        fillLegend();
 
         svg.append("g")
             .attr("class", "states")
@@ -360,6 +361,7 @@ function fillCompareChart(stateId) {
 }
 
 function fillLegend() {
+    $("#legend2").empty();
     var key = d3.select("#legend2")
         .append("svg")
         .attr("width", width)
