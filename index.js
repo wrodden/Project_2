@@ -669,6 +669,11 @@ function drawBarChart(_id) {
     var x = d3.scaleLinear()
         .range([0, width]);
 
+    
+
+
+
+
     // append the svg object to the body of the page
     // append a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
@@ -686,10 +691,8 @@ function drawBarChart(_id) {
     });
 
     // Scale the range of the data in the domains
-    // x.domain([0, 200])
-    x.domain([0, d3.max(data, function (d) { return d.value; })])
-    y.domain(data.map(function (d) { return d.key; }));
-    //y.domain([0, d3.max(data, function(d) { return d.value; })]);
+     x.domain([0, 200])
+     y.domain(data.map(function (d) { return d.key; }));
 
     // append the rectangles for the bar chart
     svg.selectAll(".bar")
